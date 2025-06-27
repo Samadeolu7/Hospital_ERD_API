@@ -16,7 +16,7 @@ public class EquipmentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createStaff(@RequestBody EquipmentRequest request) {
+    public ResponseEntity<?> createEquipment(@RequestBody EquipmentRequest request) {
         equipmentService.createEquipment(request);
         return ResponseEntity.ok().body("Staff created successfully!");
     }
@@ -37,6 +37,30 @@ public class EquipmentController {
     @GetMapping("/search")
     public ResponseEntity<?> searchEquipment(@RequestParam String query) {
         equipmentService.searchEquipment(query);
+        return ResponseEntity.ok().body("");
+    }
+
+    @GetMapping("/status/{status}")
+    public ResponseEntity<?> findEquipmentByStatus(@PathVariable String status) {
+        equipmentService.getEquipmentByStatus(status);
+        return ResponseEntity.ok().body("");
+    }
+
+    @PutMapping("/{id}/maintenance")
+    public ResponseEntity<?> markEquipmentForMaintenance(@PathVariable int id) {
+        equipmentService.markEquipmentForMaintenance(id);
+        return ResponseEntity.ok().body("");
+    }
+
+    @PutMapping("/{id}/available")
+    public ResponseEntity<?> markEquipmentAsAvailable(@PathVariable int id) {
+        equipmentService.markEquipmentAsAvailable(id);
+        return ResponseEntity.ok().body("");
+    }
+
+    @PutMapping("/{id}/decommission")
+    public ResponseEntity<?> decommissionEquipment(@PathVariable int id) {
+        equipmentService.decommissionEquipment(id);
         return ResponseEntity.ok().body("");
     }
 

@@ -21,6 +21,6 @@ public class PatientRequest {
     private String patientAddress;
     private String patientPhoneNumber;
     private String patientEmail;
-    private int Age;
+    private int patientAge;
     private PatientNextOfKin patientNextOfKin;
 }

@@ -13,7 +13,7 @@ public interface EquipmentService {
     List<Equipment> getAllEquipments();
     Equipment getEquipmentById(int id);
     List<Equipment> searchEquipment(String query);
-    List<Equipment> findEquipmentByStatus(String status);
+    List<Equipment> getEquipmentByStatus(String status);
     void markEquipmentForMaintenance(int id);
     void markEquipmentAsAvailable(int id);
     void decommissionEquipment(int id);

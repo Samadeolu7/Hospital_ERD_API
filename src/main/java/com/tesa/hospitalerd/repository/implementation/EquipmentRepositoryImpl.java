@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,6 +78,7 @@ public class EquipmentRepositoryImpl implements EquipmentRepository {
     public void markEquipmentAsAvailable(int id) {
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("equipmentId", id)
+                .addValue("maintenanceDate", new Date())
                 .addValue("equipmentStatus", "AVAILABLE");
         jdbcTemplate.update(EquipmentQuery.MARK_EQUIPMENT_AS_AVAILABLE, params);
     }
