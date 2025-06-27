@@ -1,4 +1,4 @@
-package com.tesa.hospitalerd.repository.query;
+package com.tesa.hospitalerd.repository.database.query;
 
 public class PatientQuery {
 

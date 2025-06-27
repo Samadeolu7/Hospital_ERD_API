@@ -1,8 +1,8 @@
-package com.tesa.hospitalerd.repository.implementation;
+package com.tesa.hospitalerd.repository.database.implementation;
 
 import com.tesa.hospitalerd.model.entity.Patient;
-import com.tesa.hospitalerd.repository.interfaces.PatientRepository;
-import com.tesa.hospitalerd.repository.query.PatientQuery;
+import com.tesa.hospitalerd.repository.database.interfaces.PatientRepository;
+import com.tesa.hospitalerd.repository.database.query.PatientQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

@@ -1,6 +1,6 @@
-package com.tesa.hospitalerd.service;
+package com.tesa.hospitalerd.service.interfaces;
 
-import com.tesa.hospitalerd.model.dto.EquipmentRequest;
+import com.tesa.hospitalerd.model.request.EquipmentRequest;
 import com.tesa.hospitalerd.model.entity.Equipment;
 import org.springframework.stereotype.Service;
 

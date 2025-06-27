@@ -1,9 +1,10 @@
-package com.tesa.hospitalerd.service;
+package com.tesa.hospitalerd.service.implementation;
 
 import com.google.gson.Gson;
-import com.tesa.hospitalerd.model.dto.EquipmentRequest;
+import com.tesa.hospitalerd.model.request.EquipmentRequest;
 import com.tesa.hospitalerd.model.entity.Equipment;
-import com.tesa.hospitalerd.repository.interfaces.EquipmentRepository;
+import com.tesa.hospitalerd.repository.database.interfaces.EquipmentRepository;
+import com.tesa.hospitalerd.service.interfaces.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class EquipmentServiceImpl implements EquipmentService{
+public class EquipmentServiceImpl implements EquipmentService {
 
     private final EquipmentRepository equipmentRepository;
     Gson gson = new Gson();

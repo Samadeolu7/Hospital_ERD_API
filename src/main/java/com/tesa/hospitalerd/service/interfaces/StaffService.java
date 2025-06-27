@@ -1,6 +1,6 @@
-package com.tesa.hospitalerd.service;
+package com.tesa.hospitalerd.service.interfaces;
 
-import com.tesa.hospitalerd.model.dto.StaffRequest;
+import com.tesa.hospitalerd.model.request.StaffRequest;
 import com.tesa.hospitalerd.model.entity.Staff;
 
 import java.util.List;

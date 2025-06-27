@@ -1,8 +1,8 @@
-package com.tesa.hospitalerd.repository.implementation;
+package com.tesa.hospitalerd.repository.database.implementation;
 
 import com.tesa.hospitalerd.model.entity.Staff;
-import com.tesa.hospitalerd.repository.interfaces.StaffRepository;
-import com.tesa.hospitalerd.repository.query.StaffQuery;
+import com.tesa.hospitalerd.repository.database.interfaces.StaffRepository;
+import com.tesa.hospitalerd.repository.database.query.StaffQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

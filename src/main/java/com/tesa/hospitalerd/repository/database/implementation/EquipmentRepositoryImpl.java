@@ -1,8 +1,8 @@
-package com.tesa.hospitalerd.repository.implementation;
+package com.tesa.hospitalerd.repository.database.implementation;
 
 import com.tesa.hospitalerd.model.entity.Equipment;
-import com.tesa.hospitalerd.repository.interfaces.EquipmentRepository;
-import com.tesa.hospitalerd.repository.query.EquipmentQuery;
+import com.tesa.hospitalerd.repository.database.interfaces.EquipmentRepository;
+import com.tesa.hospitalerd.repository.database.query.EquipmentQuery;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
