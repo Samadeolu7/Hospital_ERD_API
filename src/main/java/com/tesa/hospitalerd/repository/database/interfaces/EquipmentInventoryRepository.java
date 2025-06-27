@@ -2,7 +2,6 @@ package com.tesa.hospitalerd.repository.database.interfaces;
 
 import com.tesa.hospitalerd.model.entity.EquipmentInventory;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 

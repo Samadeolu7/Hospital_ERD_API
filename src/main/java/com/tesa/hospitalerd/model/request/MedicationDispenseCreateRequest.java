@@ -17,6 +17,7 @@ public class MedicationDispenseCreateRequest {
     private Long patientID;
     private Integer medicationDispenseQuantity;
     private Long medicationDispenseDispensedBy;
-    private LocalDateTime medicationDispenseAt;
+    private LocalDateTime medicationDispenseDispensedAt;
+    private String medicationDispenseSalePrice;
 }
 

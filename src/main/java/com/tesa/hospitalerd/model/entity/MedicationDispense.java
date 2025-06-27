@@ -24,7 +24,9 @@ public class MedicationDispense {
 
     private Long medicationDispenseDispensedBy;  // Staff/User
 
-    private LocalDateTime medicationDispenseAt;
+    private LocalDateTime medicationDispenseDispensedAt;
+
+    private int medicationDispenseSalePrice;
 
     private String medicationDispenseStatus;
 

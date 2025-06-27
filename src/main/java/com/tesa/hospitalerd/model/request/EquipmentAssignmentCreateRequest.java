@@ -15,6 +15,5 @@ public class EquipmentAssignmentCreateRequest {
     private Long equipmentInventoryID;
     private Long equipmentAssignedTo;
     private LocalDateTime equipmentAssignedAt;
-    private Long equipmentReceivedBy;
     private Long equipmentGivenBy;
 }
