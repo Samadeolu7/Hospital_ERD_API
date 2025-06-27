@@ -1,0 +1,26 @@
+package com.tesa.hospitalerd.repository.database.interfaces;
+
+import com.tesa.hospitalerd.model.entity.Medication;
+import com.tesa.hospitalerd.model.entity.PrescriptionItem;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+/**
+ * CRUD + custom methods for Medication
+ */
+@Repository
+public interface MedicationRepository{
+    int createMedication(Medication medication);
+
+    int updateMedication(Medication medication);
+
+    int deleteMedication(Long medicationId);
+
+    Medication findMedicationById(Long medicationId);
+
+    List<PrescriptionItem> findPrescriptionItemByMedicationId(Long medicationId);
+
+    List<Medication> findByRequiresRxTrue();
+}
+
