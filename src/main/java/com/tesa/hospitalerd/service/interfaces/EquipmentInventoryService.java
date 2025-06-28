@@ -13,5 +13,5 @@ public interface EquipmentInventoryService {
     void deleteEquipmentInventory(Long id);
     EquipmentInventory findEquipmentInventoryById(Long id);
     List<EquipmentInventory> findAllEquipmentInventory();
-    List<EquipmentInventory> findLowStock(int reorderLevel);
+    List<EquipmentInventory> findLowStock();
 }

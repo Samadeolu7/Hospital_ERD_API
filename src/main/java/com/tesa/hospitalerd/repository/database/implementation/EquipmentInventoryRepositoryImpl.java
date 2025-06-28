@@ -76,10 +76,10 @@ public class EquipmentInventoryRepositoryImpl implements EquipmentInventoryRepos
     }
 
     @Override
-    public List<EquipmentInventory> findByAvailableQuantityLessThan(int reorderLevel) {
+    public List<EquipmentInventory> findLowStock() {
         return jdbcTemplate.query(
                 EquipmentInventoryQuery.FIND_LOW_STOCK,
-                new MapSqlParameterSource("reorderLevel", reorderLevel),
+                new MapSqlParameterSource(),
                 new BeanPropertyRowMapper<>(EquipmentInventory.class)
         );
     }

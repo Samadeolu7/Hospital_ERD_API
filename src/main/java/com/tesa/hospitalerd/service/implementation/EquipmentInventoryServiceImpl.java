@@ -61,8 +61,8 @@ public class EquipmentInventoryServiceImpl implements EquipmentInventoryService 
     }
 
     @Override
-    public List<EquipmentInventory> findLowStock(int reorderLevel) {
-        return repo.findByAvailableQuantityLessThan(reorderLevel)
+    public List<EquipmentInventory> findLowStock() {
+        return repo.findByAvailableQuantityLessThan()
                 .stream()
                 .map(e -> mapper.map(e, EquipmentInventory.class))
                 .collect(Collectors.toList());

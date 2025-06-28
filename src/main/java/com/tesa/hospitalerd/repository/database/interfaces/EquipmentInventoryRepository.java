@@ -18,8 +18,7 @@ public interface EquipmentInventoryRepository{
 
     EquipmentInventory findEquipmentInventoryById(Long id);
 
-
     List<EquipmentInventory> findAllEquipmentInventory();
 
-    List<EquipmentInventory> findByAvailableQuantityLessThan(int reorderLevel);
+    List<EquipmentInventory> findLowStock();
 }

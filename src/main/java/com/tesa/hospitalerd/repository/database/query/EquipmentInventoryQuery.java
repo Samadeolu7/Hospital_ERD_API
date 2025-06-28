@@ -57,7 +57,7 @@ public class EquipmentInventoryQuery {
     public static final String FIND_LOW_STOCK = """
         SELECT *
           FROM TIS_EQUIPMENT_INVENTORY
-         WHERE equipmentAvailableQuan < :reorderLevel
+         WHERE equipmentAvailableQuan < equipmentReorderLevel
            AND equipmentInventoryStatus != 'DELETED'
     """;
 }
