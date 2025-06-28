@@ -20,7 +20,7 @@ import java.util.List;
  * JDBC implementation for EquipmentAssignmentRepository
  */
 @Repository
-public class EquipmentAssignmentRepositoryImpl implements EquipmentAssignmentRepository {
+public class xxEquipmentAssignmentRepositoryImpl implements EquipmentAssignmentRepository {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 

@@ -29,10 +29,10 @@ public class EquipmentServiceImpl implements EquipmentService {
         try {
             var equipment = gson.fromJson(gson.toJson(request), Equipment.class);
 
-            System.out.println("EQUIPMENT NAME >>");
+            System.out.println("EQUIPMENT NAME >");
             System.out.println(equipment.getEquipmentName());
 
-            System.out.println("EQUIPMENT Id >>");
+            System.out.println("EQUIPMENT Id >");
             System.out.println(equipment.getEquipmentId());
 
             equipmentRepository.createEquipment(equipment);

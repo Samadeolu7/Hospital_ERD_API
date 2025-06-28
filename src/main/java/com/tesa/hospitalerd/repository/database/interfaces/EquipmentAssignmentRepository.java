@@ -1,7 +1,7 @@
 package com.tesa.hospitalerd.repository.database.interfaces;
 
 import com.tesa.hospitalerd.model.entity.EquipmentAssignment;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.tesa.hospitalerd.model.request.EquipmentAssignmentCreateRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
