@@ -1,7 +1,9 @@
-package com.tesa.hospitalerd.service;
+package com.tesa.hospitalerd.service.interfaces;
 
-import com.tesa.hospitalerd.model.dto.EquipmentRequest;
+import com.tesa.hospitalerd.model.request.EquipmentRequest;
+import com.tesa.hospitalerd.model.request.PatientRequest;
 import com.tesa.hospitalerd.model.entity.Equipment;
+import com.tesa.hospitalerd.model.entity.Patient;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,4 +20,13 @@ public interface EquipmentService {
     void markEquipmentAsAvailable(int id);
     void decommissionEquipment(int id);
     void updateEquipment(int id, EquipmentRequest request);
+
+    interface PatientService {
+
+        void createPatient(PatientRequest request);
+        List<Patient> getAllPatients();
+        Patient getPatientById(int id);
+        List<Patient> searchPatient(String query);
+        void updatePatient(int id, PatientRequest request);
+    }
 }

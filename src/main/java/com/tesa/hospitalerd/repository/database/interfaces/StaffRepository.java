@@ -1,4 +1,4 @@
-package com.tesa.hospitalerd.repository.interfaces;
+package com.tesa.hospitalerd.repository.database.interfaces;
 
 import com.tesa.hospitalerd.model.entity.Staff;
 

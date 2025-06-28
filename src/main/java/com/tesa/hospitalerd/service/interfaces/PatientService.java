@@ -1,6 +1,6 @@
-package com.tesa.hospitalerd.service;
+package com.tesa.hospitalerd.service.interfaces;
 
-import com.tesa.hospitalerd.model.dto.PatientRequest;
+import com.tesa.hospitalerd.model.request.PatientRequest;
 import com.tesa.hospitalerd.model.entity.Patient;
 
 import java.util.List;

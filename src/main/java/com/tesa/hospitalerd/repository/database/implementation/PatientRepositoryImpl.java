@@ -1,8 +1,8 @@
-package com.tesa.hospitalerd.repository.implementation;
+package com.tesa.hospitalerd.repository.database.implementation;
 
 import com.tesa.hospitalerd.model.entity.Patient;
-import com.tesa.hospitalerd.repository.interfaces.PatientRepository;
-import com.tesa.hospitalerd.repository.query.PatientQuery;
+import com.tesa.hospitalerd.repository.database.interfaces.PatientRepository;
+import com.tesa.hospitalerd.repository.database.query.PatientQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -34,7 +34,7 @@ public class PatientRepositoryImpl implements PatientRepository {
                 .addValue("patientAddress", patient.getPatientAddress())
                 .addValue("patientPhoneNumber", patient.getPatientPhoneNumber())
                 .addValue("patientEmail", patient.getPatientEmail())
-                .addValue("patientAge", patient.getAge())
+                .addValue("patientAge", patient.getPatientAge())
                 .addValue("patientNextOfKin", patient.getPatientNextOfKin());
         jdbcTemplate.update(PatientQuery.INSERT_PATIENT, params);
     }
@@ -78,7 +78,7 @@ public class PatientRepositoryImpl implements PatientRepository {
                 .addValue("patientAddress", patient.getPatientAddress())
                 .addValue("patientPhoneNumber", patient.getPatientPhoneNumber())
                 .addValue("patientEmail", patient.getPatientEmail())
-                .addValue("patientAge", patient.getAge())
+                .addValue("patientAge", patient.getPatientAge())
                 .addValue("patientNextOfKin", patient.getPatientNextOfKin());
         jdbcTemplate.update(PatientQuery.UPDATE_PATIENT, params);
     }

@@ -1,4 +1,4 @@
-package com.tesa.hospitalerd.model.dto;
+package com.tesa.hospitalerd.model.request;
 
 import com.tesa.hospitalerd.model.entity.EquipmentStatus;
 import lombok.AllArgsConstructor;

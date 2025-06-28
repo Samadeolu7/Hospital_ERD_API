@@ -1,8 +1,8 @@
-package com.tesa.hospitalerd.repository.implementation;
+package com.tesa.hospitalerd.repository.database.implementation;
 
 import com.tesa.hospitalerd.model.entity.Equipment;
-import com.tesa.hospitalerd.repository.interfaces.EquipmentRepository;
-import com.tesa.hospitalerd.repository.query.EquipmentQuery;
+import com.tesa.hospitalerd.repository.database.interfaces.MedicationRepository;
+import com.tesa.hospitalerd.repository.database.query.MedicationInventoryQuery;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class EquipmentRepositoryImpl implements EquipmentRepository {
+public class EquipmentRepositoryImpl implements MedicationRepository.EquipmentRepository {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -29,19 +29,19 @@ public class EquipmentRepositoryImpl implements EquipmentRepository {
                 .addValue("equipmentPurchaseDate", equipment.getEquipmentPurchaseDate())
                 .addValue("equipmentLastMaintenanceDate", equipment.getEquipmentLastMaintenanceDate())
                 .addValue("equipmentStatus", equipment.getEquipmentStatus());
-        jdbcTemplate.update(EquipmentQuery.INSERT_EQUIPMENT, params);
+        jdbcTemplate.update(MedicationInventoryQuery.EquipmentQuery.INSERT_EQUIPMENT, params);
     }
 
     @Override
     public List<Equipment> findAllEquipments() {
-        return jdbcTemplate.query(EquipmentQuery.FIND_ALL_EQUIPMENTS, new BeanPropertyRowMapper<>(Equipment.class));
+        return jdbcTemplate.query(MedicationInventoryQuery.EquipmentQuery.FIND_ALL_EQUIPMENTS, new BeanPropertyRowMapper<>(Equipment.class));
     }
 
     @Override
     public Optional<Equipment> findEquipmentById(int id) {
         try {
              Equipment equipment = jdbcTemplate.queryForObject(
-                    EquipmentQuery.FIND_EQUIPMENT_BY_ID,
+                    MedicationInventoryQuery.EquipmentQuery.FIND_EQUIPMENT_BY_ID,
                     new MapSqlParameterSource("equipmentId", id),
                     new BeanPropertyRowMapper<>(Equipment.class));
             return Optional.ofNullable(equipment);
@@ -53,7 +53,7 @@ public class EquipmentRepositoryImpl implements EquipmentRepository {
     @Override
     public List<Equipment> equipmentSearch(String query) {
         return jdbcTemplate.query(
-                EquipmentQuery.SEARCH_EQUIPMENT,
+                MedicationInventoryQuery.EquipmentQuery.SEARCH_EQUIPMENT,
                 new MapSqlParameterSource("query", "%" + query + "%"),
                 new BeanPropertyRowMapper<>(Equipment.class));
     }
@@ -61,7 +61,7 @@ public class EquipmentRepositoryImpl implements EquipmentRepository {
     @Override
     public List<Equipment> findEquipmentByStatus(String status) {
         return jdbcTemplate.query(
-                EquipmentQuery.FIND_EQUIPMENTS_BY_STATUS,
+                MedicationInventoryQuery.EquipmentQuery.FIND_EQUIPMENTS_BY_STATUS,
                 new MapSqlParameterSource("equipmentStatus", status),
                 new BeanPropertyRowMapper<>(Equipment.class));
     }
@@ -71,7 +71,7 @@ public class EquipmentRepositoryImpl implements EquipmentRepository {
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("equipmentId", id)
                 .addValue("equipmentStatus", "MAINTENANCE");
-        jdbcTemplate.update(EquipmentQuery.MARK_EQUIPMENT_FOR_MAINTENANCE, params);
+        jdbcTemplate.update(MedicationInventoryQuery.EquipmentQuery.MARK_EQUIPMENT_FOR_MAINTENANCE, params);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class EquipmentRepositoryImpl implements EquipmentRepository {
                 .addValue("equipmentId", id)
                 .addValue("maintenanceDate", new Date())
                 .addValue("equipmentStatus", "AVAILABLE");
-        jdbcTemplate.update(EquipmentQuery.MARK_EQUIPMENT_AS_AVAILABLE, params);
+        jdbcTemplate.update(MedicationInventoryQuery.EquipmentQuery.MARK_EQUIPMENT_AS_AVAILABLE, params);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class EquipmentRepositoryImpl implements EquipmentRepository {
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("equipmentId", id)
                 .addValue("equipmentStatus", "DECOMMISSIONED");
-        jdbcTemplate.update(EquipmentQuery.DECOMMISSION_EQUIPMENT, params);
+        jdbcTemplate.update(MedicationInventoryQuery.EquipmentQuery.DECOMMISSION_EQUIPMENT, params);
     }
 
     @Override
@@ -100,6 +100,6 @@ public class EquipmentRepositoryImpl implements EquipmentRepository {
                 .addValue("equipmentPurchaseDate", equipment.getEquipmentPurchaseDate())
                 .addValue("equipmentLastMaintenanceDate", equipment.getEquipmentLastMaintenanceDate())
                 .addValue("equipmentStatus", equipment.getEquipmentStatus());
-        jdbcTemplate.update(EquipmentQuery.UPDATE_EQUIPMENT, params);
+        jdbcTemplate.update(MedicationInventoryQuery.EquipmentQuery.UPDATE_EQUIPMENT, params);
     }
 }

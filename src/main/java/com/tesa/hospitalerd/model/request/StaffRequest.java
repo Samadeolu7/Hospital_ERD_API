@@ -1,4 +1,4 @@
-package com.tesa.hospitalerd.model.dto;
+package com.tesa.hospitalerd.model.request;
 
 import com.tesa.hospitalerd.model.entity.StaffRole;
 import com.tesa.hospitalerd.model.entity.StaffStatus;

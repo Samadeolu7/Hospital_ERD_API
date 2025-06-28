@@ -1,7 +1,7 @@
 package com.tesa.hospitalerd.controller;
 
-import com.tesa.hospitalerd.model.dto.EquipmentRequest;
-import com.tesa.hospitalerd.service.EquipmentService;
+import com.tesa.hospitalerd.model.request.EquipmentRequest;
+import com.tesa.hospitalerd.service.interfaces.EquipmentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,7 +1,7 @@
 package com.tesa.hospitalerd.controller;
 
-import com.tesa.hospitalerd.model.dto.PatientRequest;
-import com.tesa.hospitalerd.service.PatientService;
+import com.tesa.hospitalerd.model.request.PatientRequest;
+import com.tesa.hospitalerd.service.interfaces.EquipmentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/patient")
 public class PatientController {
 
-    private final PatientService patientService;
+    private final EquipmentService.PatientService patientService;
 
-    public PatientController(PatientService patientService) {
+    public PatientController(EquipmentService.PatientService patientService) {
         this.patientService = patientService;
     }
 

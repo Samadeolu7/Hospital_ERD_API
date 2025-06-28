@@ -1,7 +1,7 @@
 package com.tesa.hospitalerd.controller;
 
-import com.tesa.hospitalerd.model.dto.StaffRequest;
-import com.tesa.hospitalerd.service.StaffService;
+import com.tesa.hospitalerd.model.request.StaffRequest;
+import com.tesa.hospitalerd.service.interfaces.StaffService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
