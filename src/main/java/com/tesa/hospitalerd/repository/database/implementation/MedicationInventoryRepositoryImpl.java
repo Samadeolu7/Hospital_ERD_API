@@ -4,6 +4,7 @@ import com.tesa.hospitalerd.model.entity.MedicationInventory;
 import com.tesa.hospitalerd.repository.database.interfaces.MedicationInventoryRepository;
 import com.tesa.hospitalerd.repository.database.query.MedicationInventoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
  * JDBC implementation for MedicationInventoryRepository
  */
 @Repository
+@Primary
 public class MedicationInventoryRepositoryImpl implements MedicationInventoryRepository {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;

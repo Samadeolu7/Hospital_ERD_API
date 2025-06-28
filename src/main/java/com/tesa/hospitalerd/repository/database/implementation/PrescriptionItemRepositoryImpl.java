@@ -4,6 +4,7 @@ import com.tesa.hospitalerd.model.entity.PrescriptionItem;
 import com.tesa.hospitalerd.repository.database.interfaces.PrescriptionItemRepository;
 import com.tesa.hospitalerd.repository.database.query.PrescriptionItemQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -16,6 +17,7 @@ import java.util.List;
  * JDBC implementation for PrescriptionItemRepository
  */
 @Repository
+@Primary
 public class PrescriptionItemRepositoryImpl implements PrescriptionItemRepository {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;

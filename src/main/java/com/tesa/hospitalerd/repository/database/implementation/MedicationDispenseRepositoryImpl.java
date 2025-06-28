@@ -4,6 +4,7 @@ import com.tesa.hospitalerd.model.entity.MedicationDispense;
 import com.tesa.hospitalerd.repository.database.interfaces.MedicationDispenseRepository;
 import com.tesa.hospitalerd.repository.database.query.MedicationDispenseQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
  * JDBC implementation for MedicationDispenseRepository
  */
 @Repository
+@Primary
 public class MedicationDispenseRepositoryImpl implements MedicationDispenseRepository {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
