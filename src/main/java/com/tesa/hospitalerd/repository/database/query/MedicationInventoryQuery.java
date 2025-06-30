@@ -77,4 +77,18 @@ public class MedicationInventoryQuery {
          WHERE medicationInventoryAvailableQuantity < medicationInventoryReorderLevel
            AND medicationInventoryStatus != 'DELETED'
     """;
+
+    public static final String SUM_AVAILABLE_BY_MEDICATION_ID = """
+        SELECT COALESCE(SUM(medicationInventoryAvailableQuantity),0)
+          FROM TIS_MEDICATION_INVENTORY
+         WHERE medicationID = :medicationId
+           AND medicationInventoryStatus != 'DELETED'
+    """;
+
+    public static final String SUM_TOTAL_BY_MEDICATION_ID = """
+        SELECT COALESCE(SUM(medicationInventoryTotalQuantity),0)
+          FROM TIS_MEDICATION_INVENTORY
+         WHERE medicationID = :medicationId
+           AND medicationInventoryStatus != 'DELETED'
+    """;
 }

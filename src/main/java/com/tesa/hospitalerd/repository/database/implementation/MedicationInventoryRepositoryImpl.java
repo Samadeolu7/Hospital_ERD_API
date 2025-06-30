@@ -98,5 +98,19 @@ public class MedicationInventoryRepositoryImpl implements MedicationInventoryRep
         );
     }
 
+    @Override
+    public int sumAvailableQuantityByMedicationId(Long medicationId) {
+        MapSqlParameterSource params = new MapSqlParameterSource("medicationId", medicationId);
+        Integer sum = jdbcTemplate.queryForObject(MedicationInventoryQuery.SUM_AVAILABLE_BY_MEDICATION_ID, params, Integer.class);
+        return sum != null ? sum : 0;
+    }
+
+    @Override
+    public int sumTotalQuantityByMedicationId(Long medicationId) {
+        MapSqlParameterSource params = new MapSqlParameterSource("medicationId", medicationId);
+        Integer sum = jdbcTemplate.queryForObject(MedicationInventoryQuery.SUM_TOTAL_BY_MEDICATION_ID, params, Integer.class);
+        return sum != null ? sum : 0;
+    }
+
 
 }

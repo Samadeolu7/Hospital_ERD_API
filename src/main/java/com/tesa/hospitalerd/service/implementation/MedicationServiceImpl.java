@@ -26,6 +26,9 @@ public class MedicationServiceImpl implements MedicationService {
         this.mapper = mapper;
     }
 
+    @Autowired
+    private com.tesa.hospitalerd.service.interfaces.MedicationInventoryService medicationInventoryService;
+
     @Override
     public Medication createMedication(MedicationCreateRequest req) {
         Medication entity = mapper.map(req, Medication.class);
@@ -83,5 +86,38 @@ public class MedicationServiceImpl implements MedicationService {
                 .stream()
                 .map(m -> mapper.map(m, Medication.class))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Recalculate and update the medication's available and total quantity fields
+     * using efficient SQL SUM queries.
+     */
+    public void recalculateQuantities(Long medicationId) {
+        int available = medicationInventoryService.getTotalAvailableQuantity(medicationId);
+        int total = medicationInventoryService.getTotalQuantity(medicationId);
+        Medication med = repo.findMedicationById(medicationId);
+        med.setMedicationAvailableQuantity(available);
+        med.setMedicationTotalQuantity(total);
+        repo.updateMedication(med);
+    }
+
+    /**
+     * Adjust the available quantity for a medication and update the medication entity only.
+     */
+    public void adjustAvailableQuantity(Long medicationId, int delta) {
+        Medication med = repo.findMedicationById(medicationId);
+        int newAvailable = (med.getMedicationAvailableQuantity() != null ? med.getMedicationAvailableQuantity() : 0) + delta;
+        med.setMedicationAvailableQuantity(Math.max(newAvailable, 0));
+        repo.updateMedication(med);
+    }
+
+    /**
+     * Adjust the total quantity for a medication and update the medication entity only.
+     */
+    public void adjustTotalQuantity(Long medicationId, int delta) {
+        Medication med = repo.findMedicationById(medicationId);
+        int newTotal = (med.getMedicationTotalQuantity() != null ? med.getMedicationTotalQuantity() : 0) + delta;
+        med.setMedicationTotalQuantity(Math.max(newTotal, 0));
+        repo.updateMedication(med);
     }
 }

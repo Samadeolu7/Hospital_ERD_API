@@ -19,9 +19,9 @@ public class MedicationInventory {
 
     private String medicationInventoryLocation;
 
-    private Integer medicationInventoryTotalQuantity;
+    private String medicationInventoryAvailableQuantity;
 
-    private Integer medicationInventoryAvailableQuantity;
+    private Integer medicationInventoryTotalQuantity;
 
     private String medicationInventoryBatchNo;
 

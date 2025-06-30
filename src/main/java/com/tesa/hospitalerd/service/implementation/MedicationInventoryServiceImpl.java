@@ -5,6 +5,7 @@ import com.tesa.hospitalerd.model.request.MedicationInventoryCreateRequest;
 import com.tesa.hospitalerd.model.request.MedicationInventoryUpdateRequest;
 import com.tesa.hospitalerd.repository.database.interfaces.MedicationInventoryRepository;
 import com.tesa.hospitalerd.service.interfaces.MedicationInventoryService;
+import com.tesa.hospitalerd.service.interfaces.MedicationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +19,15 @@ public class MedicationInventoryServiceImpl implements MedicationInventoryServic
 
     private final MedicationInventoryRepository repo;
     private final ModelMapper mapper;
+    private final MedicationService medicationService;
 
     @Autowired
     public MedicationInventoryServiceImpl(MedicationInventoryRepository repo,
-                                          ModelMapper mapper) {
+                                          ModelMapper mapper,
+                                          MedicationService medicationService) {
         this.repo   = repo;
         this.mapper = mapper;
+        this.medicationService = medicationService;
     }
 
     @Override
@@ -31,6 +35,8 @@ public class MedicationInventoryServiceImpl implements MedicationInventoryServic
         MedicationInventory entity = mapper.map(req, MedicationInventory.class);
         repo.createMedicationInventory(entity);
         MedicationInventory saved = repo.findMedicationInventoryById(entity.getMedicationInventoryID());
+        // Recalculate medication quantities after new inventory is created
+        medicationService.recalculateQuantities(saved.getMedicationID());
         return mapper.map(saved, MedicationInventory.class);
     }
 
@@ -77,4 +83,13 @@ public class MedicationInventoryServiceImpl implements MedicationInventoryServic
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public int getTotalAvailableQuantity(Long medicationId) {
+        return repo.sumAvailableQuantityByMedicationId(medicationId);
+    }
+
+    @Override
+    public int getTotalQuantity(Long medicationId) {
+        return repo.sumTotalQuantityByMedicationId(medicationId);
+    }
 }

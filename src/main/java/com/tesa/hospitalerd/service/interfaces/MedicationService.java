@@ -18,4 +18,7 @@ public interface MedicationService {
     List<PrescriptionItem> findPrescriptionItems(Long medId);
     List<Medication> findRequiresRx();
     List<Medication> findLowStock();
+    void recalculateQuantities(Long medicationId);
+    void adjustAvailableQuantity(Long medicationId, int delta);
+    void adjustTotalQuantity(Long medicationId, int delta);
 }

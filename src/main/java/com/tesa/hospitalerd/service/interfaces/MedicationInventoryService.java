@@ -17,5 +17,7 @@ public interface MedicationInventoryService {
     List<MedicationInventory> findByMedicationId(Long medId);
     List<MedicationInventory> findExpiringBefore(LocalDate date);
     List<MedicationInventory> findAll();
+    int getTotalAvailableQuantity(Long medicationId);
+    int getTotalQuantity(Long medicationId);
 }
 
