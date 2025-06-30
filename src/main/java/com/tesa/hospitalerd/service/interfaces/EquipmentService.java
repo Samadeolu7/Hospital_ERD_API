@@ -13,20 +13,20 @@ public interface EquipmentService {
 
     void createEquipment(EquipmentRequest request);
     List<Equipment> getAllEquipments();
-    Equipment getEquipmentById(int id);
+    Equipment getEquipmentById(Long id);
     List<Equipment> searchEquipment(String query);
     List<Equipment> getEquipmentByStatus(String status);
-    void markEquipmentForMaintenance(int id);
-    void markEquipmentAsAvailable(int id);
-    void decommissionEquipment(int id);
-    void updateEquipment(int id, EquipmentRequest request);
+    void markEquipmentForMaintenance(Long id);
+    void markEquipmentAsAvailable(Long id);
+    void decommissionEquipment(Long id);
+    void updateEquipment(Long id, EquipmentRequest request);
 
-    interface PatientService {
-
-        void createPatient(PatientRequest request);
-        List<Patient> getAllPatients();
-        Patient getPatientById(int id);
-        List<Patient> searchPatient(String query);
-        void updatePatient(int id, PatientRequest request);
-    }
+//    interface PatientService {
+//
+//        void createPatient(PatientRequest request);
+//        List<Patient> getAllPatients();
+//        Patient getPatientById(int id);
+//        List<Patient> searchPatient(String query);
+//        void updatePatient(int id, PatientRequest request);
+//    }
 }

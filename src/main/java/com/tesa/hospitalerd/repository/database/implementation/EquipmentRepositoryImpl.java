@@ -1,7 +1,8 @@
 package com.tesa.hospitalerd.repository.database.implementation;
 
 import com.tesa.hospitalerd.model.entity.Equipment;
-import com.tesa.hospitalerd.repository.database.interfaces.MedicationRepository;
+import com.tesa.hospitalerd.repository.database.interfaces.EquipmentRepository;
+import com.tesa.hospitalerd.repository.database.query.EquipmentQuery;
 import com.tesa.hospitalerd.repository.database.query.MedicationInventoryQuery;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class EquipmentRepositoryImpl implements MedicationRepository.EquipmentRepository {
+public class EquipmentRepositoryImpl implements EquipmentRepository {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -38,7 +39,7 @@ public class EquipmentRepositoryImpl implements MedicationRepository.EquipmentRe
     }
 
     @Override
-    public Optional<Equipment> findEquipmentById(int id) {
+    public Optional<Equipment> findEquipmentById(Long id) {
         try {
              Equipment equipment = jdbcTemplate.queryForObject(
                     MedicationInventoryQuery.EquipmentQuery.FIND_EQUIPMENT_BY_ID,
@@ -61,34 +62,34 @@ public class EquipmentRepositoryImpl implements MedicationRepository.EquipmentRe
     @Override
     public List<Equipment> findEquipmentByStatus(String status) {
         return jdbcTemplate.query(
-                MedicationInventoryQuery.EquipmentQuery.FIND_EQUIPMENTS_BY_STATUS,
+                EquipmentQuery.FIND_EQUIPMENTS_BY_STATUS,
                 new MapSqlParameterSource("equipmentStatus", status),
                 new BeanPropertyRowMapper<>(Equipment.class));
     }
 
     @Override
-    public void markEquipmentForMaintenance(int id) {
+    public void markEquipmentForMaintenance(Long id) {
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("equipmentId", id)
                 .addValue("equipmentStatus", "MAINTENANCE");
-        jdbcTemplate.update(MedicationInventoryQuery.EquipmentQuery.MARK_EQUIPMENT_FOR_MAINTENANCE, params);
+        jdbcTemplate.update(EquipmentQuery.MARK_EQUIPMENT_FOR_MAINTENANCE, params);
     }
 
     @Override
-    public void markEquipmentAsAvailable(int id) {
+    public void markEquipmentAsAvailable(Long id) {
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("equipmentId", id)
                 .addValue("maintenanceDate", new Date())
                 .addValue("equipmentStatus", "AVAILABLE");
-        jdbcTemplate.update(MedicationInventoryQuery.EquipmentQuery.MARK_EQUIPMENT_AS_AVAILABLE, params);
+        jdbcTemplate.update(EquipmentQuery.MARK_EQUIPMENT_AS_AVAILABLE, params);
     }
 
     @Override
-    public void decommissionEquipment(int id) {
+    public void decommissionEquipment(Long id) {
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("equipmentId", id)
                 .addValue("equipmentStatus", "DECOMMISSIONED");
-        jdbcTemplate.update(MedicationInventoryQuery.EquipmentQuery.DECOMMISSION_EQUIPMENT, params);
+        jdbcTemplate.update(EquipmentQuery.DECOMMISSION_EQUIPMENT, params);
     }
 
     @Override
@@ -100,6 +101,6 @@ public class EquipmentRepositoryImpl implements MedicationRepository.EquipmentRe
                 .addValue("equipmentPurchaseDate", equipment.getEquipmentPurchaseDate())
                 .addValue("equipmentLastMaintenanceDate", equipment.getEquipmentLastMaintenanceDate())
                 .addValue("equipmentStatus", equipment.getEquipmentStatus());
-        jdbcTemplate.update(MedicationInventoryQuery.EquipmentQuery.UPDATE_EQUIPMENT, params);
+        jdbcTemplate.update(EquipmentQuery.UPDATE_EQUIPMENT, params);
     }
 }

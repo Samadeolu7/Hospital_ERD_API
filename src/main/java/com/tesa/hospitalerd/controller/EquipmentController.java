@@ -29,7 +29,7 @@ public class EquipmentController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getEquipmentById(@PathVariable int id) {
+    public ResponseEntity<?> getEquipmentById(@PathVariable Long id) {
         equipmentService.getEquipmentById(id);
         return ResponseEntity.ok().body("");
     }
@@ -47,25 +47,25 @@ public class EquipmentController {
     }
 
     @PutMapping("/{id}/maintenance")
-    public ResponseEntity<?> markEquipmentForMaintenance(@PathVariable int id) {
+    public ResponseEntity<?> markEquipmentForMaintenance(@PathVariable Long id) {
         equipmentService.markEquipmentForMaintenance(id);
         return ResponseEntity.ok().body("");
     }
 
     @PutMapping("/{id}/available")
-    public ResponseEntity<?> markEquipmentAsAvailable(@PathVariable int id) {
+    public ResponseEntity<?> markEquipmentAsAvailable(@PathVariable Long id) {
         equipmentService.markEquipmentAsAvailable(id);
         return ResponseEntity.ok().body("");
     }
 
     @PutMapping("/{id}/decommission")
-    public ResponseEntity<?> decommissionEquipment(@PathVariable int id) {
+    public ResponseEntity<?> decommissionEquipment(@PathVariable Long id) {
         equipmentService.decommissionEquipment(id);
         return ResponseEntity.ok().body("");
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateEquipment(@PathVariable int id, @RequestBody EquipmentRequest request) {
+    public ResponseEntity<?> updateEquipment(@PathVariable Long id, @RequestBody EquipmentRequest request) {
         equipmentService.updateEquipment(id, request);
         return ResponseEntity.ok().body("");
     }

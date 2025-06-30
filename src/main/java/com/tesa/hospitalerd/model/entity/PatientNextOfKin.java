@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PatientNextOfKin {
 
-    private int nextOfKinId;
+    private Long nextOfKinId;
     private String nextOfKinFirstName;
     private String nextOfKinLastName;
     private String nextOfKinPhoneNumber;

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Patient {
 
-    private int patientId;
+    private Long patientId;
     private String patientFirstName;
     private String patientLastName;
     private String patientDOB;
@@ -23,7 +23,7 @@ public class Patient {
     private String patientAddress;
     private String patientPhoneNumber;
     private String patientEmail;
-    private int patientAge;
+    private Integer patientAge;
     private PatientNextOfKin patientNextOfKin;
     private LocalDateTime patientCreatedAt;
     private LocalDateTime patientUpdatedAt;

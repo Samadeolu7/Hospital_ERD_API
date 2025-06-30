@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Equipment {
 
-    private int equipmentId;
+    private Long equipmentId;
     private String equipmentName;
     private String equipmentSerialNumber;
     private LocalDate equipmentPurchaseDate;

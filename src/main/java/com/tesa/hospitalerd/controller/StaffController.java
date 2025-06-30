@@ -5,6 +5,8 @@ import com.tesa.hospitalerd.service.interfaces.StaffService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/staff")
 public class StaffController {
@@ -36,14 +38,13 @@ public class StaffController {
     }
 
     @GetMapping("/available-doctors")
-    public ResponseEntity<?> getAvailableDoctors(@RequestParam String date,
-                                                 @RequestParam String time) {
-        staffService.getAvailableDoctors(date, time);
+    public ResponseEntity<?> getAvailableDoctors(@RequestParam LocalDateTime dateTime) {
+        staffService.getAvailableDoctors(dateTime);
         return ResponseEntity.ok().body("");
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getStaffById(@PathVariable int id) {
+    public ResponseEntity<?> getStaffById(@PathVariable Long id) {
         staffService.getStaffById(id);
         return ResponseEntity.ok().body("");
     }
@@ -55,7 +56,7 @@ public class StaffController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatePatient(@PathVariable int id, @RequestBody StaffRequest request) {
+    public ResponseEntity<?> updatePatient(@PathVariable Long id, @RequestBody StaffRequest request) {
         staffService.updateStaff(id, request);
         return ResponseEntity.ok().body("");
     }

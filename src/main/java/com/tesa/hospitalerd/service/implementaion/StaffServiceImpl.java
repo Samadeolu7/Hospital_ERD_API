@@ -1,37 +1,37 @@
 package com.tesa.hospitalerd.service.implementaion;
 
 import com.google.gson.Gson;
-import com.tesa.hospitalerd.model.request.StaffRequest;
 import com.tesa.hospitalerd.model.entity.Staff;
-import com.tesa.hospitalerd.repository.database.interfaces.MedicationDispenseRepository;
+import com.tesa.hospitalerd.model.request.StaffRequest;
+import com.tesa.hospitalerd.repository.database.interfaces.StaffRepository;
 import com.tesa.hospitalerd.service.interfaces.StaffService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
 public class StaffServiceImpl implements StaffService {
 
-    private final MedicationDispenseRepository.StaffRepository staffRepository;
+    private final StaffRepository staffRepository;
     Gson gson = new Gson();
 
-    @Autowired
-    public StaffServiceImpl(MedicationDispenseRepository.StaffRepository staffRepository) {
+    public StaffServiceImpl(StaffRepository staffRepository) {
         this.staffRepository = staffRepository;
     }
+
 
     @Override
     public void createStaff(StaffRequest request) {
         try {
             var staff = gson.fromJson(gson.toJson(request), Staff.class);
 
-            System.out.println("PATIENT NAME >>");
+            System.out.println("STAFF NAME >>");
             System.out.println(staff.getStaffFirstName());
 
-            System.out.println("PATIENT Id >>");
+            System.out.println("STAFF Id >>");
             System.out.println(staff.getStaffId());
 
             staffRepository.createStaff(staff);
@@ -59,16 +59,16 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public List<Staff> getAvailableDoctors(String date, String time) {
+    public List<Staff> getAvailableDoctors(LocalDateTime dateTime) {
         try {
-            return staffRepository.findAvailableDoctors(date, time);
+            return staffRepository.findAvailableDoctors(dateTime);
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to get available doctors: " + e.getMessage(), e);
         }
     }
 
     @Override
-    public Staff getStaffById(int id) {
+    public Staff getStaffById(Long id) {
         try {
             return staffRepository.findStaffById(id)
                     .orElseThrow(() -> new NoSuchElementException("Staff with id: " + id + " not found"));
@@ -87,7 +87,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public void updateStaff(int id, StaffRequest request) {
+    public void updateStaff(Long id, StaffRequest request) {
         try {
             Staff existingStaff = staffRepository.findStaffById(id)
                     .orElseThrow(() -> new NoSuchElementException("Staff  with id: " + id + " not found"));
@@ -98,6 +98,15 @@ public class StaffServiceImpl implements StaffService {
 
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to update staff: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void updateStaffStatus(Long staffId, String newStatus) {
+        try {
+            staffRepository.updateStaffStatus(staffId, newStatus);
+        } catch (DataAccessException e) {
+            throw new RuntimeException("Failed to update staff status: " + e.getMessage(), e);
         }
     }
 }

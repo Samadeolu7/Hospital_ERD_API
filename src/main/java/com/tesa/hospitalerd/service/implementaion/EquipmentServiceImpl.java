@@ -1,9 +1,9 @@
 package com.tesa.hospitalerd.service.implementaion;
 
 import com.google.gson.Gson;
-import com.tesa.hospitalerd.model.request.EquipmentRequest;
 import com.tesa.hospitalerd.model.entity.Equipment;
-import com.tesa.hospitalerd.repository.database.interfaces.MedicationRepository;
+import com.tesa.hospitalerd.model.request.EquipmentRequest;
+import com.tesa.hospitalerd.repository.database.interfaces.EquipmentRepository;
 import com.tesa.hospitalerd.service.interfaces.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -15,11 +15,11 @@ import java.util.NoSuchElementException;
 @Service
 public class EquipmentServiceImpl implements EquipmentService {
 
-    private final MedicationRepository.EquipmentRepository equipmentRepository;
+    private final EquipmentRepository equipmentRepository;
     Gson gson = new Gson();
 
     @Autowired
-    public EquipmentServiceImpl(MedicationRepository.EquipmentRepository equipmentRepository) {
+    public EquipmentServiceImpl(EquipmentRepository equipmentRepository) {
         this.equipmentRepository = equipmentRepository;
     }
 
@@ -51,7 +51,7 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public Equipment getEquipmentById(int id) {
+    public Equipment getEquipmentById(Long id) {
         try {
             return equipmentRepository.findEquipmentById(id)
                     .orElseThrow(() -> new NoSuchElementException("Equipment with id: " + id + " not found"));
@@ -79,7 +79,7 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public void markEquipmentForMaintenance(int id) {
+    public void markEquipmentForMaintenance(Long id) {
         try {
             equipmentRepository.markEquipmentForMaintenance(id);
         } catch (DataAccessException e) {
@@ -88,7 +88,7 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public void markEquipmentAsAvailable(int id) {
+    public void markEquipmentAsAvailable(Long id) {
         try {
             equipmentRepository.markEquipmentAsAvailable(id);
         } catch (DataAccessException e) {
@@ -97,7 +97,7 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public void decommissionEquipment(int id) {
+    public void decommissionEquipment(Long id) {
         try {
             equipmentRepository.decommissionEquipment(id);
         } catch (DataAccessException e) {
@@ -107,7 +107,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
 
     @Override
-    public void updateEquipment(int id, EquipmentRequest request) {
+    public void updateEquipment(Long id, EquipmentRequest request) {
         try {
             Equipment existingEquipment = equipmentRepository.findEquipmentById(id)
                     .orElseThrow(() -> new NoSuchElementException("Equipment  with id: " + id + " not found"));

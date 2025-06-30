@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Staff {
 
-    private int staffId;
+    private Long staffId;
     private String staffFirstName;
     private String staffLastName;
     private StaffRole staffRole;
@@ -23,5 +23,5 @@ public class Staff {
     private String staffEmail;
     private StaffStatus staffStatus;
     private LocalDateTime staffCreatedAt;
-    private LocalDateTime staffUpdated;
+    private LocalDateTime staffUpdatedAt;
 }

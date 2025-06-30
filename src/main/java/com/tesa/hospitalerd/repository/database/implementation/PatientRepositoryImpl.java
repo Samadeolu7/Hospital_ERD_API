@@ -45,7 +45,7 @@ public class PatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public Optional<Patient> findPatientById(int id) {
+    public Optional<Patient> findPatientById(Long id) {
         try {
             Patient patient = jdbcTemplate.queryForObject(
                     PatientQuery.FIND_PATIENT_BY_ID,
