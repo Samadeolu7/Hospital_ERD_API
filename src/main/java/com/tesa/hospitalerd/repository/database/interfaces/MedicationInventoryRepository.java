@@ -23,6 +23,6 @@ public interface MedicationInventoryRepository{
 
     List<MedicationInventory> findByExpiryDateBefore(LocalDate date);
 
-    List<MedicationInventory> findLowStock();
+    List<MedicationInventory> findAllMedicationInventory();
 }
 

@@ -2,6 +2,7 @@
 package com.tesa.hospitalerd.repository.database.implementation;
 
 import com.tesa.hospitalerd.model.entity.Medication;
+import com.tesa.hospitalerd.model.entity.MedicationInventory;
 import com.tesa.hospitalerd.model.entity.PrescriptionItem;
 import com.tesa.hospitalerd.repository.database.interfaces.MedicationRepository;
 import com.tesa.hospitalerd.repository.database.query.MedicationQuery;
@@ -64,6 +65,27 @@ public class MedicationRepositoryImpl implements MedicationRepository {
         return jdbcTemplate.queryForObject(
                 MedicationQuery.FIND_BY_ID,
                 new MapSqlParameterSource("id", medicationId),
+                new BeanPropertyRowMapper<>(Medication.class)
+        );
+    }
+
+    @Override
+    public List<Medication> findAllMedication() {
+        return jdbcTemplate.query(
+                MedicationQuery.FIND_ALL,
+                new BeanPropertyRowMapper<>(Medication.class)
+        );
+    }
+
+    @Override
+    public List<MedicationInventory> findAllMedicationInventory() {
+        return List.of();
+    }
+
+    @Override
+    public List<Medication> findLowStock() {
+        return jdbcTemplate.query(
+                MedicationQuery.FIND_LOW_STOCK,
                 new BeanPropertyRowMapper<>(Medication.class)
         );
     }

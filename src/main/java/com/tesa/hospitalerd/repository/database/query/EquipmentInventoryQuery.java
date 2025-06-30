@@ -5,9 +5,9 @@ public class EquipmentInventoryQuery {
         INSERT INTO TIS_EQUIPMENT_INVENTORY
           (equipmentID,
            equipmentTotalQuantity,
-           equipmentAvailableQuan,
+           equipmentAvailableQuantity,
            equipmentLocation,
-           equipmentReorderLevel,
+           equipmentInventoryReorderLevel,
            equipmentInventoryStatus,
            equipmentInventoryCreatedAt,
            equipmentInventoryUpdatedAt)
@@ -26,9 +26,9 @@ public class EquipmentInventoryQuery {
         UPDATE TIS_EQUIPMENT_INVENTORY
            SET equipmentID               = COALESCE(:equipmentID, equipmentID),
                equipmentTotalQuantity    = COALESCE(:totalQuantity, equipmentTotalQuantity),
-               equipmentAvailableQuan    = COALESCE(:availableQuantity, equipmentAvailableQuan),
+               equipmentAvailableQuan    = COALESCE(:availableQuantity, equipmentAvailableQuantity),
                equipmentLocation         = COALESCE(:location, equipmentLocation),
-               equipmentReorderLevel     = COALESCE(:reorderLevel, equipmentReorderLevel),
+               equipmentReorderLevel     = COALESCE(:reorderLevel, equipmentInventoryReorderLevel),
                equipmentInventoryStatus  = COALESCE(:status, equipmentInventoryStatus),
                equipmentInventoryUpdatedAt = CURRENT_TIMESTAMP
          WHERE equipmentInventoryID      = :id
@@ -57,7 +57,7 @@ public class EquipmentInventoryQuery {
     public static final String FIND_LOW_STOCK = """
         SELECT *
           FROM TIS_EQUIPMENT_INVENTORY
-         WHERE equipmentAvailableQuan < equipmentReorderLevel
+         WHERE equipmentAvailableQuantity < equipmentInventoryReorderLevel
            AND equipmentInventoryStatus != 'DELETED'
     """;
 }

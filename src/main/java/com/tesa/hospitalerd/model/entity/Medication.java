@@ -23,6 +23,10 @@ public class Medication {
 
     private String medicationUnit;
 
+    private Integer medicationAvailableQuantity;
+
+    private Integer medicationTotalQuantity;
+
     private Integer medicationReorderLevel;
 
     private String medicationStatus;

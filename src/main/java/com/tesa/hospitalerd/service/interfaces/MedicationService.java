@@ -14,6 +14,8 @@ public interface MedicationService {
 
     void delete(Long id);
     Medication findById(Long id);
+    List<Medication> findAll();
     List<PrescriptionItem> findPrescriptionItems(Long medId);
     List<Medication> findRequiresRx();
+    List<Medication> findLowStock();
 }

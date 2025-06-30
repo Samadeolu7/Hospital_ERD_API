@@ -1,7 +1,6 @@
 package com.tesa.hospitalerd.controller;
 
 import com.tesa.hospitalerd.model.entity.Medication;
-import com.tesa.hospitalerd.model.entity.PrescriptionItem;
 import com.tesa.hospitalerd.model.request.MedicationCreateRequest;
 import com.tesa.hospitalerd.model.request.MedicationUpdateRequest;
 import com.tesa.hospitalerd.model.response.ApiResponse;
@@ -57,6 +56,15 @@ public class MedicationController {
         return ResponseEntity.ok(ResponseBuilder.success(resp));
     }
 
+    @GetMapping("/all-medications")
+    public ResponseEntity<ApiResponse<List<MedicationResponse>>> allMedications() {
+        List<MedicationResponse> resp = service.findAll()
+                .stream()
+                .map(m -> mapper.map(m, MedicationResponse.class))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(ResponseBuilder.success(resp));
+    }
+
     @GetMapping("/requires-rx")
     public ResponseEntity<ApiResponse<List<MedicationResponse>>> listRx() {
         List<MedicationResponse> resp = service.findRequiresRx()
@@ -73,6 +81,16 @@ public class MedicationController {
                 .stream()
                 .map(pi -> mapper.map(pi, PrescriptionItemResponse.class))
                 .collect(Collectors.toList());
+        return ResponseEntity.ok(ResponseBuilder.success(resp));
+    }
+
+    @GetMapping("/low-stock")
+    public ResponseEntity<ApiResponse<List<MedicationResponse>>> lowStock() {
+        List<MedicationResponse> resp = service.findLowStock()
+                .stream()
+                .map(med->mapper.map(med,MedicationResponse.class))
+                .collect(Collectors.toList());
+
         return ResponseEntity.ok(ResponseBuilder.success(resp));
     }
 

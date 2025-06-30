@@ -4,11 +4,11 @@ public class MedicationInventoryQuery {
     public static final String CREATE_INVENTORY = """
         INSERT INTO TIS_MEDICATION_INVENTORY
           (medicationID,
-           medInvenLocation,
-           medInventotalQuantity,
-           medInvenAvailableQuan,
-           medInvenBatchNo,
-           medInvenExpiryDate,
+           medicationInventoryLocation,
+           medicationInventorytotalQuantity,
+           medicationInventoryAvailableQuantity,
+           medicationInventoryBatchNo,
+           medicationInventoryExpiryDate,
            medicationInventoryStatus,
            medicationInventoryCreatedAt,
            medicationInventoryUpdatedAt)
@@ -27,48 +27,54 @@ public class MedicationInventoryQuery {
     public static final String UPDATE_INVENTORY = """
         UPDATE TIS_MEDICATION_INVENTORY
            SET medicationID                     = COALESCE(:medicationID, medicationID),
-               medInvenLocation                 = COALESCE(:location, medInvenLocation),
-               medInventotalQuantity            = COALESCE(:totalQuantity, medInventotalQuantity),
-               medInvenAvailableQuan            = COALESCE(:availableQuantity, medInvenAvailableQuan),
-               medInvenBatchNo                  = COALESCE(:batchNumber, medInvenBatchNo),
-               medInvenExpiryDate               = COALESCE(:expiryDate, medInvenExpiryDate),
+               medicationInventoryLocation                 = COALESCE(:location, medicationInventoryLocation),
+               medicationInventorytotalQuantity            = COALESCE(:totalQuantity, medicationInventorytotalQuantity),
+               medicationInventoryAvailableQuantity            = COALESCE(:availableQuantity, medicationInventoryAvailableQuantity),
+               medicationInventoryBatchNo                  = COALESCE(:batchNumber, medicationInventoryBatchNo),
+               medicationInventoryExpiryDate               = COALESCE(:expiryDate, medicationInventoryExpiryDate),
                medicationInventoryStatus        = COALESCE(:status, medicationInventoryStatus),
                medicationInventoryUpdatedAt     = CURRENT_TIMESTAMP
-         WHERE medicationInvenID               = :id
+         WHERE medicationInventoryID               = :id
     """;
 
     public static final String DELETE_INVENTORY = """
         UPDATE TIS_MEDICATION_INVENTORY
            SET medicationInventoryStatus        = 'DELETED',
                medicationInventoryUpdatedAt     = CURRENT_TIMESTAMP
-         WHERE medicationInvenID               = :id
+         WHERE medicationInventoryID               = :id
     """;
 
     public static final String FIND_BY_ID = """
         SELECT *
           FROM TIS_MEDICATION_INVENTORY
-         WHERE medicationInvenID = :id
+         WHERE medicationInventoryID = :id
            AND medicationInventoryStatus != 'DELETED'
+    """;
+
+    public static final String FIND_ALL = """
+        SELECT *
+          FROM TIS_MEDICATION_INVENTORY
+         WHERE medicationInventoryStatus != 'DELETED'
     """;
 
     public static final String FIND_BY_MEDICATION = """
         SELECT *
           FROM TIS_MEDICATION_INVENTORY
-         WHERE medicationID = :medId
+         WHERE medicationID = :medicationId
            AND medicationInventoryStatus != 'DELETED'
     """;
 
     public static final String FIND_EXPIRED = """
         SELECT *
           FROM TIS_MEDICATION_INVENTORY
-         WHERE medInvenExpiryDate < :date
+         WHERE medicationInventoryExpiryDate < :date
            AND medicationInventoryStatus != 'DELETED'
     """;
 
     public static final String FIND_LOW_STOCK = """
         SELECT *
           FROM TIS_MEDICATION_INVENTORY
-         WHERE medInvenAvailableQuan < medicationReorderLevel
+         WHERE medicationInventoryAvailableQuantity < medicationInventoryReorderLevel
            AND medicationInventoryStatus != 'DELETED'
     """;
 }

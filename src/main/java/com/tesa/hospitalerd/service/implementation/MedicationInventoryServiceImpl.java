@@ -70,10 +70,11 @@ public class MedicationInventoryServiceImpl implements MedicationInventoryServic
     }
 
     @Override
-    public List<MedicationInventory> findLowStock() {
-        return repo.findLowStock()
+    public List<MedicationInventory> findAll() {
+        return repo.findAllMedicationInventory()
                 .stream()
                 .map(e -> mapper.map(e, MedicationInventory.class))
                 .collect(Collectors.toList());
     }
+
 }

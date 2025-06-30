@@ -50,6 +50,12 @@ public class MedicationQuery {
            AND medicationStatus != 'DELETED'
     """;
 
+    public static final String FIND_ALL  = """
+        SELECT *
+          FROM TIS_MEDICATION
+         WHERE medicationStatus != 'DELETED'
+    """;
+
     public static final String FIND_PRESCRIPTION_ITEMS = """
         SELECT *
           FROM TIS_PRESCRIPTION_ITEM
@@ -59,7 +65,14 @@ public class MedicationQuery {
     public static final String FIND_REQUIRES_RX = """
         SELECT *
           FROM TIS_MEDICATION
-         WHERE medRequiresRX = TRUE
+         WHERE medRequiresRX = 1
            AND medicationStatus != 'DELETED'
+    """;
+
+    public  static final String FIND_LOW_STOCK = """
+        SELECT *
+         FROM TIS_MEDICATION
+        WHERE medicationAvailableQuantity < medicationReorderLevel
+            AND medicationStatus != 'DELETED'
     """;
 }

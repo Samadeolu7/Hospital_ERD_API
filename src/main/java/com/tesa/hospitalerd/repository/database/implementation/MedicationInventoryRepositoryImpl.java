@@ -60,6 +60,8 @@ public class MedicationInventoryRepositoryImpl implements MedicationInventoryRep
         );
     }
 
+
+
     @Override
     public MedicationInventory findMedicationInventoryById(Long id) {
         return jdbcTemplate.queryForObject(
@@ -88,10 +90,13 @@ public class MedicationInventoryRepositoryImpl implements MedicationInventoryRep
     }
 
     @Override
-    public List<MedicationInventory> findLowStock() {
+    public List<MedicationInventory> findAllMedicationInventory() {
         return jdbcTemplate.query(
-                MedicationInventoryQuery.FIND_LOW_STOCK,
+                MedicationInventoryQuery.FIND_ALL,
+                new MapSqlParameterSource(),
                 new BeanPropertyRowMapper<>(MedicationInventory.class)
         );
     }
+
+
 }

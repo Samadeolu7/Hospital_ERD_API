@@ -54,6 +54,14 @@ public class MedicationServiceImpl implements MedicationService {
     }
 
     @Override
+    public List<Medication> findAll() {
+        return repo.findAllMedication()
+                .stream()
+                .map(m -> mapper.map(m, Medication.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<PrescriptionItem> findPrescriptionItems(Long medId) {
         return repo.findPrescriptionItemByMedicationId(medId)
                 .stream()
@@ -64,6 +72,14 @@ public class MedicationServiceImpl implements MedicationService {
     @Override
     public List<Medication> findRequiresRx() {
         return repo.findByRequiresRxTrue()
+                .stream()
+                .map(m -> mapper.map(m, Medication.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Medication> findLowStock() {
+        return repo.findLowStock()
                 .stream()
                 .map(m -> mapper.map(m, Medication.class))
                 .collect(Collectors.toList());

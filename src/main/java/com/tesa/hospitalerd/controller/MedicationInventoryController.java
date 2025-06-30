@@ -79,9 +79,9 @@ public class MedicationInventoryController {
         return ResponseEntity.ok(ResponseBuilder.success(resp));
     }
 
-    @GetMapping("/low-stock")
-    public ResponseEntity<ApiResponse<List<MedicationInventoryResponse>>> lowStock() {
-        List<MedicationInventoryResponse> resp = service.findLowStock()
+    @GetMapping("/all-med-inventory")
+    public ResponseEntity<ApiResponse<List<MedicationInventoryResponse>>> allMedicationInventory() {
+        List<MedicationInventoryResponse> resp = service.findAll()
                 .stream()
                 .map(e -> mapper.map(e, MedicationInventoryResponse.class))
                 .collect(Collectors.toList());

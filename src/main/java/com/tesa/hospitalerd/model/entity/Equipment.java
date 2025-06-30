@@ -16,11 +16,22 @@ import java.time.LocalDateTime;
 public class Equipment {
 
     private int equipmentId;
+
     private String equipmentName;
+
     private String equipmentSerialNumber;
+
     private LocalDate equipmentPurchaseDate;
+
     private LocalDate equipmentLastMaintenanceDate;
+
+    private LocalDate equipmentAvailableQuantity;
+
+    private LocalDate equipmentTotalQuantity;
+
     private EquipmentStatus equipmentStatus;
+
     private LocalDateTime equipmentCreatedAt;
+
     private LocalDateTime equipmentUpdated;
 }
