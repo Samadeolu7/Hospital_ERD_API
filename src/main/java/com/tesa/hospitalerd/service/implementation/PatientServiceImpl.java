@@ -1,14 +1,17 @@
-package com.tesa.hospitalerd.service.implementaion;
+package com.tesa.hospitalerd.service.implementation;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.tesa.hospitalerd.model.entity.Patient;
 import com.tesa.hospitalerd.model.request.PatientRequest;
 import com.tesa.hospitalerd.repository.database.interfaces.PatientRepository;
 import com.tesa.hospitalerd.service.interfaces.PatientService;
+import com.tesa.hospitalerd.util.LocalDateTimeAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -16,7 +19,9 @@ import java.util.NoSuchElementException;
 public class PatientServiceImpl implements PatientService {
 
     private final PatientRepository patientRepository;
-    Gson gson = new Gson();
+    Gson gson = new GsonBuilder()
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+            .create();
 
     @Autowired
     public PatientServiceImpl(PatientRepository patientRepository) {

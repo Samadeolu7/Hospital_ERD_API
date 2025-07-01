@@ -76,7 +76,7 @@ public class EquipmentQuery {
                 equipmentSerialNumber = COALESCE(:equipmentSerialNumber, equipmentSerialNumber),
                 equipmentLastMaintenanceDate = COALESCE(:equipmentLastMaintenanceDate, equipmentLastMaintenanceDate),
                 equipmentStatus = COALESCE(:equipmentStatus, equipmentStatus),
-                equipment = COALESCE(:equipment, equipment),
+  
                 equipmentUpdatedAt = CURRENT_TIMESTAMP
             WHERE equipmentId = :equipmentId
             """;

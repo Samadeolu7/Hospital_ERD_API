@@ -1,6 +1,7 @@
-package com.tesa.hospitalerd.service.implementaion;
+package com.tesa.hospitalerd.service.implementation;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.tesa.hospitalerd.model.entity.Appointment;
 import com.tesa.hospitalerd.model.request.AppointmentRequest;
 import com.tesa.hospitalerd.model.request.AppointmentRescheduleRequest;
@@ -8,6 +9,7 @@ import com.tesa.hospitalerd.repository.database.interfaces.AppointmentRepository
 import com.tesa.hospitalerd.repository.database.interfaces.PatientRepository;
 import com.tesa.hospitalerd.repository.database.interfaces.StaffRepository;
 import com.tesa.hospitalerd.service.interfaces.AppointmentService;
+import com.tesa.hospitalerd.util.LocalDateTimeAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository appointmentRepository;
     private final PatientRepository patientRepository;
     private final StaffRepository staffRepository;
-    Gson gson = new Gson();
+    Gson gson = new GsonBuilder()
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+            .create();
 
     @Autowired
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository, PatientRepository patientRepository, StaffRepository staffRepository) {

@@ -24,7 +24,7 @@ public class Patient {
     private String patientPhoneNumber;
     private String patientEmail;
     private Integer patientAge;
-    private PatientNextOfKin patientNextOfKin;
+    //private PatientNextOfKin patientNextOfKin;
     private LocalDateTime patientCreatedAt;
     private LocalDateTime patientUpdatedAt;
 }

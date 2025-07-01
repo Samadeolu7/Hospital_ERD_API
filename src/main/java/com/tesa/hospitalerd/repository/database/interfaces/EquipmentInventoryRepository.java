@@ -14,11 +14,11 @@ public interface EquipmentInventoryRepository{
 
     int updateEquipmentInventory(EquipmentInventory equipmentInventory);
 
-    int deleteEquipmentInventory(EquipmentInventory equipmentInventory);
+    int deleteEquipmentInventory(Long id);
 
-    EquipmentInventory findEquipmentInventoryById(Integer id);
+    EquipmentInventory findEquipmentInventoryById(Long id);
 
     List<EquipmentInventory> findAllEquipmentInventory();
 
-    List<EquipmentInventory> findByAvailableQuantityLessThan(int reorderLevel);
+    List<EquipmentInventory> findLowStock();
 }

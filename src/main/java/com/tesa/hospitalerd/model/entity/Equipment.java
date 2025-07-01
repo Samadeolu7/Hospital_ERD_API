@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -18,9 +17,9 @@ public class Equipment {
     private Long equipmentId;
     private String equipmentName;
     private String equipmentSerialNumber;
-    private LocalDate equipmentPurchaseDate;
-    private LocalDate equipmentLastMaintenanceDate;
+    private LocalDateTime equipmentPurchaseDate;
+    private LocalDateTime equipmentLastMaintenanceDate;
     private EquipmentStatus equipmentStatus;
     private LocalDateTime equipmentCreatedAt;
-    private LocalDateTime equipmentUpdated;
+    private LocalDateTime equipmentUpdatedAt;
 }

@@ -1,14 +1,17 @@
-package com.tesa.hospitalerd.service.implementaion;
+package com.tesa.hospitalerd.service.implementation;
 
 import com.google.gson.Gson;
-import com.tesa.hospitalerd.model.entity.Equipment;
+import com.google.gson.GsonBuilder;
 import com.tesa.hospitalerd.model.request.EquipmentRequest;
+import com.tesa.hospitalerd.model.entity.Equipment;
 import com.tesa.hospitalerd.repository.database.interfaces.EquipmentRepository;
 import com.tesa.hospitalerd.service.interfaces.EquipmentService;
+import com.tesa.hospitalerd.util.LocalDateTimeAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -16,7 +19,9 @@ import java.util.NoSuchElementException;
 public class EquipmentServiceImpl implements EquipmentService {
 
     private final EquipmentRepository equipmentRepository;
-    Gson gson = new Gson();
+    Gson gson = new GsonBuilder()
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+            .create();
 
     @Autowired
     public EquipmentServiceImpl(EquipmentRepository equipmentRepository) {
@@ -29,10 +34,10 @@ public class EquipmentServiceImpl implements EquipmentService {
         try {
             var equipment = gson.fromJson(gson.toJson(request), Equipment.class);
 
-            System.out.println("EQUIPMENT NAME >>");
+            System.out.println("EQUIPMENT NAME >");
             System.out.println(equipment.getEquipmentName());
 
-            System.out.println("EQUIPMENT Id >>");
+            System.out.println("EQUIPMENT Id >");
             System.out.println(equipment.getEquipmentId());
 
             equipmentRepository.createEquipment(equipment);

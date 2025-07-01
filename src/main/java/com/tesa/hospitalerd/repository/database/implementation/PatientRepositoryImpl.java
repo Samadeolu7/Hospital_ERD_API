@@ -34,8 +34,8 @@ public class PatientRepositoryImpl implements PatientRepository {
                 .addValue("patientAddress", patient.getPatientAddress())
                 .addValue("patientPhoneNumber", patient.getPatientPhoneNumber())
                 .addValue("patientEmail", patient.getPatientEmail())
-                .addValue("patientAge", patient.getPatientAge())
-                .addValue("patientNextOfKin", patient.getPatientNextOfKin());
+                .addValue("patientAge", patient.getPatientAge());
+                //.addValue("patientNextOfKin", patient.getPatientNextOfKin());
         jdbcTemplate.update(PatientQuery.INSERT_PATIENT, params);
     }
 
@@ -78,8 +78,8 @@ public class PatientRepositoryImpl implements PatientRepository {
                 .addValue("patientAddress", patient.getPatientAddress())
                 .addValue("patientPhoneNumber", patient.getPatientPhoneNumber())
                 .addValue("patientEmail", patient.getPatientEmail())
-                .addValue("patientAge", patient.getPatientAge())
-                .addValue("patientNextOfKin", patient.getPatientNextOfKin());
+                .addValue("patientAge", patient.getPatientAge());
+                //.addValue("patientNextOfKin", patient.getPatientNextOfKin());
         jdbcTemplate.update(PatientQuery.UPDATE_PATIENT, params);
     }
 }

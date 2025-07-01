@@ -21,7 +21,7 @@ public class Appointment {
     private LocalDateTime appointmentDateTime;
     private Integer appointmentDurationMinutes;
     private String appointmentReason;
-    private String appointmentStatus;
+    private AppointmentStatus appointmentStatus;
     private LocalDateTime appointmentCreatedAt;
     private LocalDateTime appointmentUpdatedAt;
 }

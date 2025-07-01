@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Types;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -26,14 +27,14 @@ public class StaffRepositoryImpl implements StaffRepository {
     @Override
     public void createStaff(Staff staff) {
         MapSqlParameterSource params = new MapSqlParameterSource()
-                .addValue("staffFirstName", staff.getStaffFirstName())
-                .addValue("staffLastName", staff.getStaffLastName())
-                .addValue("staffRole", staff.getStaffRole())
-                .addValue("staffSpecialization", staff.getStaffSpecialization())
-                .addValue("staffPhoneNumber", staff.getStaffPhoneNumber())
-                .addValue("staffDepartment", staff.getStaffDepartment())
-                .addValue("staffPhoneNumber", staff.getStaffEmail())
-                .addValue("staffStatus", staff.getStaffStatus());
+                .addValue("staffFirstName", staff.getStaffFirstName(), Types.VARCHAR)
+                .addValue("staffLastName", staff.getStaffLastName(), Types.VARCHAR)
+                .addValue("staffRole", staff.getStaffRole(), Types.VARCHAR)
+                .addValue("staffSpecialization", staff.getStaffSpecialization(), Types.VARCHAR)
+                .addValue("staffDepartment", staff.getStaffDepartment(), Types.VARCHAR)
+                .addValue("staffPhoneNumber", staff.getStaffPhoneNumber(), Types.VARCHAR)
+                .addValue("staffEmail", staff.getStaffEmail(), Types.VARCHAR)
+                .addValue("staffStatus", staff.getStaffStatus(), Types.VARCHAR);
         jdbcTemplate.update(StaffQuery.INSERT_STAFF, params);
     }
 

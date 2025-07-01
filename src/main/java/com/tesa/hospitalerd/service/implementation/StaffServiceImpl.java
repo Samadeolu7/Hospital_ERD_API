@@ -1,10 +1,12 @@
-package com.tesa.hospitalerd.service.implementaion;
+package com.tesa.hospitalerd.service.implementation;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.tesa.hospitalerd.model.entity.Staff;
 import com.tesa.hospitalerd.model.request.StaffRequest;
 import com.tesa.hospitalerd.repository.database.interfaces.StaffRepository;
 import com.tesa.hospitalerd.service.interfaces.StaffService;
+import com.tesa.hospitalerd.util.LocalDateTimeAdapter;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,9 @@ import java.util.NoSuchElementException;
 public class StaffServiceImpl implements StaffService {
 
     private final StaffRepository staffRepository;
-    Gson gson = new Gson();
+    Gson gson = new GsonBuilder()
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+            .create();
 
     public StaffServiceImpl(StaffRepository staffRepository) {
         this.staffRepository = staffRepository;

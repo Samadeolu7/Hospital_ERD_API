@@ -11,8 +11,8 @@ public class StaffQuery {
             staffDepartment,
             staffPhoneNumber,
             staffEmail,
-            staffStatus
-            staffCreatedAt
+            staffStatus,
+            staffCreatedAt,
             staffUpdatedAt)
             VALUES
             (:staffFirstName,

@@ -4,6 +4,7 @@ import com.tesa.hospitalerd.model.entity.EquipmentInventory;
 import com.tesa.hospitalerd.repository.database.interfaces.EquipmentInventoryRepository;
 import com.tesa.hospitalerd.repository.database.query.EquipmentInventoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -13,7 +14,9 @@ import java.util.List;
 /**
  * JDBC implementation for EquipmentInventoryRepository
  */
+
 @Repository
+@Primary
 public class EquipmentInventoryRepositoryImpl implements EquipmentInventoryRepository {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -48,15 +51,15 @@ public class EquipmentInventoryRepositoryImpl implements EquipmentInventoryRepos
     }
 
     @Override
-    public int deleteEquipmentInventory(EquipmentInventory equipmentInventory) {
+    public int deleteEquipmentInventory(Long id) {
         return jdbcTemplate.update(
                 EquipmentInventoryQuery.DELETE_INVENTORY,
-                new MapSqlParameterSource("id", equipmentInventory.getEquipmentInventoryID())
+                new MapSqlParameterSource("id", id)
         );
     }
 
     @Override
-    public EquipmentInventory findEquipmentInventoryById(Integer id) {
+    public EquipmentInventory findEquipmentInventoryById(Long id) {
         return jdbcTemplate.queryForObject(
                 EquipmentInventoryQuery.FIND_BY_ID,
                 new MapSqlParameterSource("id", id),
@@ -73,10 +76,10 @@ public class EquipmentInventoryRepositoryImpl implements EquipmentInventoryRepos
     }
 
     @Override
-    public List<EquipmentInventory> findByAvailableQuantityLessThan(int reorderLevel) {
+    public List<EquipmentInventory> findLowStock() {
         return jdbcTemplate.query(
                 EquipmentInventoryQuery.FIND_LOW_STOCK,
-                new MapSqlParameterSource("reorderLevel", reorderLevel),
+                new MapSqlParameterSource(),
                 new BeanPropertyRowMapper<>(EquipmentInventory.class)
         );
     }
