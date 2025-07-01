@@ -18,5 +18,9 @@ public class MedicationDispenseResponse {
     private Long patientID;
     private Integer medicationDispenseQuantity;
     private Long medicationDispenseDispensedBy;
-    private LocalDateTime medicationDispenseAt;
+    private Integer medicationDispenseSalePrice;
+    private String medicationDispenseStatus;
+    private LocalDateTime medicationDispenseDispensedAt;
+    private LocalDateTime medicationDispenseCreatedAt;
+    private LocalDateTime medicationDispenseUpdatedAt;
 }
