@@ -30,7 +30,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
 
     @Override
-    public void createEquipment(EquipmentRequest request) {
+    public Equipment createEquipment(EquipmentRequest request) {
         try {
             var equipment = gson.fromJson(gson.toJson(request), Equipment.class);
 
@@ -44,6 +44,7 @@ public class EquipmentServiceImpl implements EquipmentService {
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to create equipment: " + e.getMessage(), e);
         }
+        return null;
     }
 
     @Override
@@ -84,35 +85,38 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public void markEquipmentForMaintenance(Long id) {
+    public Equipment markEquipmentForMaintenance(Long id) {
         try {
             equipmentRepository.markEquipmentForMaintenance(id);
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to mark equipment for maintenance: " + e.getMessage(), e);
         }
+        return null;
     }
 
     @Override
-    public void markEquipmentAsAvailable(Long id) {
+    public Equipment markEquipmentAsAvailable(Long id) {
         try {
             equipmentRepository.markEquipmentAsAvailable(id);
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to mark equipment as available : " + e.getMessage(), e);
         }
+        return null;
     }
 
     @Override
-    public void decommissionEquipment(Long id) {
+    public Equipment decommissionEquipment(Long id) {
         try {
             equipmentRepository.decommissionEquipment(id);
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to decommission equipment: " + e.getMessage(), e);
         }
+        return null;
     }
 
 
     @Override
-    public void updateEquipment(Long id, EquipmentRequest request) {
+    public Equipment updateEquipment(Long id, EquipmentRequest request) {
         try {
             Equipment existingEquipment = equipmentRepository.findEquipmentById(id)
                     .orElseThrow(() -> new NoSuchElementException("Equipment  with id: " + id + " not found"));
@@ -124,5 +128,6 @@ public class EquipmentServiceImpl implements EquipmentService {
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to update patient: " + e.getMessage(), e);
         }
+        return null;
     }
 }

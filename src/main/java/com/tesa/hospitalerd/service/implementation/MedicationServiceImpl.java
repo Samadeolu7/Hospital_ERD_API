@@ -8,6 +8,7 @@ import com.tesa.hospitalerd.repository.database.interfaces.MedicationRepository;
 import com.tesa.hospitalerd.service.interfaces.MedicationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,16 +19,21 @@ public class MedicationServiceImpl implements MedicationService {
 
     private final MedicationRepository repo;
     private final ModelMapper mapper;
+    private final com.tesa.hospitalerd.service.interfaces.MedicationInventoryService medicationInventoryService;
 
     @Autowired
     public MedicationServiceImpl(MedicationRepository repo,
-                                 ModelMapper mapper) {
+                                 ModelMapper mapper,
+                                 com.tesa.hospitalerd.service.interfaces.MedicationInventoryService medicationInventoryService) {
         this.repo   = repo;
         this.mapper = mapper;
+        this.medicationInventoryService = medicationInventoryService;
     }
 
-    @Autowired
-    private com.tesa.hospitalerd.service.interfaces.MedicationInventoryService medicationInventoryService;
+    @EventListener
+    public void handleMedicationInventoryChangedEvent(MedicationInventoryChangedEvent event) {
+        recalculateQuantities(event.getMedicationId());
+    }
 
     @Override
     public Medication createMedication(MedicationCreateRequest req) {

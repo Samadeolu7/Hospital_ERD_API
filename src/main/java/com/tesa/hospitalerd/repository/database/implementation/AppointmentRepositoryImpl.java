@@ -53,7 +53,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
         try {
             Appointment appointment = jdbcTemplate.queryForObject(
                     AppointmentQuery.FIND_APPOINTMENT_BY_ID,
-                    new MapSqlParameterSource("studentId", id),
+                    new MapSqlParameterSource("staffId", id),
                     new BeanPropertyRowMapper<>(Appointment.class));
             return Optional.ofNullable(appointment);
         } catch (Exception e) {
@@ -68,12 +68,16 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
 
     @Override
     public List<Appointment> findAppointmentsByPatientId(Long patientId) {
-        return jdbcTemplate.query(AppointmentQuery.FIND_APPOINTMENTS_BY_PATIENT_ID, new BeanPropertyRowMapper<>(Appointment.class));
+        return jdbcTemplate.query(AppointmentQuery.FIND_APPOINTMENTS_BY_PATIENT_ID,
+                new MapSqlParameterSource("patientId", patientId),
+                new BeanPropertyRowMapper<>(Appointment.class));
     }
 
     @Override
     public List<Appointment> findAppointmentsByStaffId(Long staffId) {
-        return jdbcTemplate.query(AppointmentQuery.FIND_APPOINTMENTS_BY_STAFF_ID, new BeanPropertyRowMapper<>(Appointment.class));
+        return jdbcTemplate.query(AppointmentQuery.FIND_APPOINTMENTS_BY_STAFF_ID,
+                new MapSqlParameterSource("staffId", staffId),
+                new BeanPropertyRowMapper<>(Appointment.class));
     }
 
     @Override

@@ -53,7 +53,7 @@ public class AppointmentQuery {
     public static final String FIND_APPOINTMENTS_BY_STAFF_ID = """
             SELECT * FROM TIS_APPOINTMENT
             WHERE staffId = :staffId
-            ORDER BY appointmentDateTime DESC""\";
+            ORDER BY appointmentDateTime DESC
             """;
 
     public static final String FIND_APPOINTMENT_BY_ID = """

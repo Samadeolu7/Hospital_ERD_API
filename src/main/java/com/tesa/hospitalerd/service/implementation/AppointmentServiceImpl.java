@@ -77,7 +77,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public void rescheduleAppointment(Long id, AppointmentRescheduleRequest request) {
+    public Appointment rescheduleAppointment(Long id, AppointmentRescheduleRequest request) {
         try {
             // Validate appointment exists
             appointmentRepository.findAppointmentById(id)
@@ -100,6 +100,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to get equipments: " + e.getMessage(), e);
         }
+        return null;
     }
 
     @Override

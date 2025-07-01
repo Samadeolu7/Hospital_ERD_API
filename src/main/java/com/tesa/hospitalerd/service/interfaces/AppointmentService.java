@@ -10,7 +10,7 @@ import java.util.List;
 public interface AppointmentService {
 
     Appointment bookAppointment(AppointmentRequest request);
-    void rescheduleAppointment(Long id, AppointmentRescheduleRequest request);
+    Appointment rescheduleAppointment(Long id, AppointmentRescheduleRequest request);
     void cancelAppointment(Long id);
     List<Appointment> getUpcomingAppointments();
     List<Appointment> getPatientAppointments(Long patientId);

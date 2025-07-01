@@ -29,7 +29,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public void createPatient(PatientRequest request) {
+    public Patient createPatient(PatientRequest request) {
         try {
             var patient = gson.fromJson(gson.toJson(request), Patient.class);
 
@@ -44,6 +44,7 @@ public class PatientServiceImpl implements PatientService {
             throw new RuntimeException("Failed to create patients: " + e.getMessage(), e);
         }
 
+        return null;
     }
 
     @Override
@@ -75,7 +76,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public void updatePatient(Long id, PatientRequest request) {
+    public Patient updatePatient(Long id, PatientRequest request) {
         try {
             Patient existingPatient = patientRepository.findPatientById(id)
                     .orElseThrow(() -> new NoSuchElementException("Patient  with id: " + id + " not found"));
@@ -87,5 +88,6 @@ public class PatientServiceImpl implements PatientService {
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to update patient: " + e.getMessage(), e);
         }
+        return null;
     }
 }

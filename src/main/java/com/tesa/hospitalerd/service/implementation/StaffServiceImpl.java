@@ -28,7 +28,7 @@ public class StaffServiceImpl implements StaffService {
 
 
     @Override
-    public void createStaff(StaffRequest request) {
+    public Staff createStaff(StaffRequest request) {
         try {
             var staff = gson.fromJson(gson.toJson(request), Staff.class);
 
@@ -42,6 +42,7 @@ public class StaffServiceImpl implements StaffService {
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to create staff: " + e.getMessage(), e);
         }
+        return null;
     }
 
     @Override
@@ -91,7 +92,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public void updateStaff(Long id, StaffRequest request) {
+    public Staff updateStaff(Long id, StaffRequest request) {
         try {
             Staff existingStaff = staffRepository.findStaffById(id)
                     .orElseThrow(() -> new NoSuchElementException("Staff  with id: " + id + " not found"));
@@ -103,6 +104,7 @@ public class StaffServiceImpl implements StaffService {
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to update staff: " + e.getMessage(), e);
         }
+        return null;
     }
 
     @Override

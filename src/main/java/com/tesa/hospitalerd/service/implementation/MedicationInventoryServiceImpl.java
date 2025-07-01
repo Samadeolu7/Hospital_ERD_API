@@ -5,9 +5,9 @@ import com.tesa.hospitalerd.model.request.MedicationInventoryCreateRequest;
 import com.tesa.hospitalerd.model.request.MedicationInventoryUpdateRequest;
 import com.tesa.hospitalerd.repository.database.interfaces.MedicationInventoryRepository;
 import com.tesa.hospitalerd.service.interfaces.MedicationInventoryService;
-import com.tesa.hospitalerd.service.interfaces.MedicationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,15 +19,15 @@ public class MedicationInventoryServiceImpl implements MedicationInventoryServic
 
     private final MedicationInventoryRepository repo;
     private final ModelMapper mapper;
-    private final MedicationService medicationService;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Autowired
     public MedicationInventoryServiceImpl(MedicationInventoryRepository repo,
                                           ModelMapper mapper,
-                                          MedicationService medicationService) {
+                                          ApplicationEventPublisher eventPublisher) {
         this.repo   = repo;
         this.mapper = mapper;
-        this.medicationService = medicationService;
+        this.eventPublisher = eventPublisher;
     }
 
     @Override
@@ -35,8 +35,8 @@ public class MedicationInventoryServiceImpl implements MedicationInventoryServic
         MedicationInventory entity = mapper.map(req, MedicationInventory.class);
         repo.createMedicationInventory(entity);
         MedicationInventory saved = repo.findMedicationInventoryById(entity.getMedicationInventoryID());
-        // Recalculate medication quantities after new inventory is created
-        medicationService.recalculateQuantities(saved.getMedicationID());
+        // Publish event to recalculate medication quantities after new inventory is created
+        eventPublisher.publishEvent(new MedicationInventoryChangedEvent(this, saved.getMedicationID()));
         return mapper.map(saved, MedicationInventory.class);
     }
 
@@ -45,12 +45,19 @@ public class MedicationInventoryServiceImpl implements MedicationInventoryServic
         MedicationInventory entity = mapper.map(req, MedicationInventory.class);
         repo.updateMedicationInventory(entity);
         MedicationInventory updated = repo.findMedicationInventoryById(entity.getMedicationInventoryID());
+        // Publish event to recalculate medication quantities after inventory update
+        eventPublisher.publishEvent(new MedicationInventoryChangedEvent(this, updated.getMedicationID()));
         return mapper.map(updated, MedicationInventory.class);
     }
 
     @Override
     public void delete(Long id) {
+        MedicationInventory deleted = repo.findMedicationInventoryById(id);
         repo.deleteMedicationInventoryById(id);
+        if (deleted != null) {
+            // Publish event to recalculate medication quantities after inventory delete
+            eventPublisher.publishEvent(new MedicationInventoryChangedEvent(this, deleted.getMedicationID()));
+        }
     }
 
     @Override

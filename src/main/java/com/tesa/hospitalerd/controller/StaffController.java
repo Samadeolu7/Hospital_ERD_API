@@ -2,7 +2,9 @@ package com.tesa.hospitalerd.controller;
 
 import com.tesa.hospitalerd.model.entity.Staff;
 import com.tesa.hospitalerd.model.request.StaffRequest;
+import com.tesa.hospitalerd.model.response.ApiResponse;
 import com.tesa.hospitalerd.service.interfaces.StaffService;
+import com.tesa.hospitalerd.util.ResponseBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,47 +21,45 @@ public class StaffController {
         this.staffService = staffService;
     }
 
-
     @PostMapping("/create")
-    public ResponseEntity<?> createStaff(@RequestBody StaffRequest request) {
-        staffService.createStaff(request);
-        return ResponseEntity.ok().body("Staff created successfully!");
+    public ResponseEntity<ApiResponse<Staff>> createStaff(@RequestBody StaffRequest request) {
+        Staff created = staffService.createStaff(request);
+        return ResponseEntity.ok(ResponseBuilder.success("Staff created successfully!", created));
     }
 
-
     @GetMapping("/all-staffs")
-    public ResponseEntity<?> getAllStaffs() {
+    public ResponseEntity<ApiResponse<List<Staff>>> getAllStaffs() {
         List<Staff> staff = staffService.getAllStaffs();
-        return ResponseEntity.ok(staff);
+        return ResponseEntity.ok(ResponseBuilder.success(staff));
     }
 
     @GetMapping("/all-doctors")
-    public ResponseEntity<?> getAllDoctors() {
-        List <Staff> staff = staffService.getAllDoctors();
-        return ResponseEntity.ok(staff);
+    public ResponseEntity<ApiResponse<List<Staff>>> getAllDoctors() {
+        List<Staff> staff = staffService.getAllDoctors();
+        return ResponseEntity.ok(ResponseBuilder.success(staff));
     }
 
     @GetMapping("/available-doctors")
-    public ResponseEntity<?> getAvailableDoctors(@RequestParam LocalDateTime dateTime) {
+    public ResponseEntity<ApiResponse<List<Staff>>> getAvailableDoctors(@RequestParam LocalDateTime dateTime) {
         List<Staff> staff = staffService.getAvailableDoctors(dateTime);
-        return ResponseEntity.ok(staff);
+        return ResponseEntity.ok(ResponseBuilder.success(staff));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getStaffById(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<Staff>> getStaffById(@PathVariable Long id) {
         Staff staff = staffService.getStaffById(id);
-        return ResponseEntity.ok(staff);
+        return ResponseEntity.ok(ResponseBuilder.success(staff));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> searchStaff(@RequestParam String query) {
+    public ResponseEntity<ApiResponse<List<Staff>>> searchStaff(@RequestParam String query) {
         List<Staff> staff = staffService.searchStaff(query);
-        return ResponseEntity.ok(staff);
+        return ResponseEntity.ok(ResponseBuilder.success(staff));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatePatient(@PathVariable Long id, @RequestBody StaffRequest request) {
-        staffService.updateStaff(id, request);
-        return ResponseEntity.ok().body("");
+    public ResponseEntity<ApiResponse<Staff>> updatePatient(@PathVariable Long id, @RequestBody StaffRequest request) {
+        Staff updated = staffService.updateStaff(id, request);
+        return ResponseEntity.ok(ResponseBuilder.success("Staff updated successfully!", updated));
     }
 }

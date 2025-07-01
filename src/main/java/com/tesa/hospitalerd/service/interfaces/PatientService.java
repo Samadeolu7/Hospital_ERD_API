@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface PatientService {
 
-    void createPatient(PatientRequest request);
+    Patient createPatient(PatientRequest request);
     List<Patient> getAllPatients();
     Patient getPatientById(Long id);
     List<Patient> searchPatient(String query);
-    void updatePatient(Long id, PatientRequest request);
+    Patient updatePatient(Long id, PatientRequest request);
 }
