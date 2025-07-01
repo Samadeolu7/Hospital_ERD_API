@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,4 +18,9 @@ public class MedicationResponse {
     private Boolean medRequiresRX;
     private String medicationUnit;
     private Integer medicationReorderLevel;
+    private Integer medicationAvailableQuantity;
+    private Integer medicationTotalQuantity;
+    private String medicationStatus;
+    private LocalDateTime medicationCreatedAt;
+    private LocalDateTime medicationUpdatedAt;
 }
