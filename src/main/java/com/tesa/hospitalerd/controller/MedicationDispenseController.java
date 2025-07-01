@@ -90,6 +90,16 @@ public class MedicationDispenseController {
         return ResponseEntity.ok(ResponseBuilder.success(resp));
     }
 
+    @GetMapping("/history")
+    public ResponseEntity<ApiResponse<List<MedicationDispenseResponse>>> getAllDispenseHistory() {
+        List<MedicationDispenseResponse> resp = service.findAll()
+                .stream()
+                .map(e -> mapper.map(e, MedicationDispenseResponse.class))
+                .collect(Collectors.toList());
+        String msg = resp.isEmpty() ? "No dispense history found" : "Medication dispense history fetched successfully";
+        return ResponseEntity.ok(ResponseBuilder.success(msg, resp));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id) {
         service.delete(id);

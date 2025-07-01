@@ -99,4 +99,12 @@ public class MedicationDispenseRepositoryImpl implements MedicationDispenseRepos
                 new BeanPropertyRowMapper<>(MedicationDispense.class)
         );
     }
+
+    @Override
+    public List<MedicationDispense> findAllMedicationDispense() {
+        return jdbcTemplate.query(
+            MedicationDispenseQuery.FIND_ALL,
+            new BeanPropertyRowMapper<>(MedicationDispense.class)
+        );
+    }
 }
