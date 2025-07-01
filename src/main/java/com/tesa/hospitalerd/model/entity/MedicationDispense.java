@@ -22,7 +22,7 @@ public class MedicationDispense {
 
     private Integer medicationDispenseQuantity;
 
-    private Long medicationDispenseDispensedBy;  // Staff/User
+    private Long medicationDispenseDispensedBy;  // Staff
 
     private LocalDateTime medicationDispenseDispensedAt;
 

@@ -17,4 +17,5 @@ public interface MedicationDispenseService {
     List<MedicationDispense> findByMedicationId(Long medId);
     List<MedicationDispense> findByDispenserId(Long staffId);
     List<MedicationDispense> findByDateRange(LocalDate start, LocalDate end);
+    List<MedicationDispense> findAll();
 }

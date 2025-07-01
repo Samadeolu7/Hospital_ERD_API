@@ -74,4 +74,10 @@ public class MedicationDispenseQuery {
          WHERE medicationDispenseDispensedAt BETWEEN :startDate AND :endDate
            AND medicationDispenseStatus != 'DELETED'
     """;
+
+    public static final String FIND_ALL = """
+        SELECT *
+          FROM TIS_MEDICATION_DISPENSE
+         WHERE medicationDispenseStatus != 'DELETED'
+    """;
 }
