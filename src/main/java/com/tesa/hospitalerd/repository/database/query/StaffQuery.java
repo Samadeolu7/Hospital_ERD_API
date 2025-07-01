@@ -11,9 +11,9 @@ public class StaffQuery {
             staffDepartment,
             staffPhoneNumber,
             staffEmail,
-            staffStatus
-            staffCreatedAt
-            staffUpdated)
+            staffStatus,
+            staffCreatedAt,
+            staffUpdatedAt)
             VALUES
             (:staffFirstName,
             :staffLastName,
@@ -22,7 +22,7 @@ public class StaffQuery {
             :staffDepartment,
             :staffPhoneNumber,
             :staffEmail,
-            COALESCE(:staffStatus, 'OFF_DUTY'),
+            COALESCE(:staffStatus, 'ACTIVE'),
             CURRENT_TIMESTAMP,
             CURRENT_TIMESTAMP)
             """;
@@ -46,10 +46,7 @@ public class StaffQuery {
             AND staffId NOT IN (
             SELECT staffId
             FROM TIS_APPOINTMENTS
-            WHERE DATE(appointmentDate) = :appointmentDate
-            AND TIME(appointmentTime) BETWEEN
-            SUBTIME(:time, '00:30:00')
-            AND ADDTIME(:time, '01:00:00')
+            WHERE DATETIME(appointmentDateTime) = :dateTime
             """;
 
 
@@ -85,5 +82,14 @@ public class StaffQuery {
                 staffUpdatedAt = CURRENT_TIMESTAMP
             WHERE staffId = :staffId
             """;
-    
+
+    public static final String UPDATE_STAFF_STATUS = """
+            UPDATE staff
+            SET staffStatus = :newStatus
+            WHERE staffId = :staffId
+            """;
 }
+
+//AND TIME(appointmentTime) BETWEEN
+//SUBTIME(:time, '00:30:00')
+//AND ADDTIME(:time, '01:00:00')

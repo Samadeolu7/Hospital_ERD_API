@@ -9,7 +9,7 @@ public interface PatientRepository {
 
     void createPatient(Patient patient);
     List<Patient> findAllPatients();
-    Optional<Patient> findPatientById(int id);
+    Optional<Patient> findPatientById(Long id);
     List<Patient> patientSearch(String query);
     void updatePatient(Patient patient);
 }

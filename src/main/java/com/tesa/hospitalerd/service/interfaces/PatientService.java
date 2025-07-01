@@ -9,7 +9,7 @@ public interface PatientService {
 
     void createPatient(PatientRequest request);
     List<Patient> getAllPatients();
-    Patient getPatientById(int id);
+    Patient getPatientById(Long id);
     List<Patient> searchPatient(String query);
-    void updatePatient(int id, PatientRequest request);
+    void updatePatient(Long id, PatientRequest request);
 }

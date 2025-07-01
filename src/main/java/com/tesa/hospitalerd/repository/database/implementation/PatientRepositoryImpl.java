@@ -34,8 +34,8 @@ public class PatientRepositoryImpl implements PatientRepository {
                 .addValue("patientAddress", patient.getPatientAddress())
                 .addValue("patientPhoneNumber", patient.getPatientPhoneNumber())
                 .addValue("patientEmail", patient.getPatientEmail())
-                .addValue("patientAge", patient.getPatientAge())
-                .addValue("patientNextOfKin", patient.getPatientNextOfKin());
+                .addValue("patientAge", patient.getPatientAge());
+                //.addValue("patientNextOfKin", patient.getPatientNextOfKin());
         jdbcTemplate.update(PatientQuery.INSERT_PATIENT, params);
     }
 
@@ -45,7 +45,7 @@ public class PatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public Optional<Patient> findPatientById(int id) {
+    public Optional<Patient> findPatientById(Long id) {
         try {
             Patient patient = jdbcTemplate.queryForObject(
                     PatientQuery.FIND_PATIENT_BY_ID,
@@ -78,8 +78,8 @@ public class PatientRepositoryImpl implements PatientRepository {
                 .addValue("patientAddress", patient.getPatientAddress())
                 .addValue("patientPhoneNumber", patient.getPatientPhoneNumber())
                 .addValue("patientEmail", patient.getPatientEmail())
-                .addValue("patientAge", patient.getPatientAge())
-                .addValue("patientNextOfKin", patient.getPatientNextOfKin());
+                .addValue("patientAge", patient.getPatientAge());
+                //.addValue("patientNextOfKin", patient.getPatientNextOfKin());
         jdbcTemplate.update(PatientQuery.UPDATE_PATIENT, params);
     }
 }

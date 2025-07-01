@@ -9,11 +9,11 @@ public interface EquipmentRepository {
 
     void createEquipment(Equipment equipment);
     List<Equipment> findAllEquipments();
-    Optional<Equipment> findEquipmentById(int id);
+    Optional<Equipment> findEquipmentById(Long id);
     List<Equipment> equipmentSearch(String query);
     List<Equipment> findEquipmentByStatus(String status);
-    void markEquipmentForMaintenance(int id);
-    void markEquipmentAsAvailable(int id);
-    void decommissionEquipment(int id);
+    void markEquipmentForMaintenance(Long id);
+    void markEquipmentAsAvailable(Long id);
+    void decommissionEquipment(Long id);
     void updateEquipment(Equipment equipment);
 }

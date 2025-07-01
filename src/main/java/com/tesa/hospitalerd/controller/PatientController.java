@@ -2,6 +2,7 @@ package com.tesa.hospitalerd.controller;
 
 import com.tesa.hospitalerd.model.request.PatientRequest;
 import com.tesa.hospitalerd.service.interfaces.PatientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +13,11 @@ public class PatientController {
 
     private final PatientService patientService;
 
+    @Autowired
     public PatientController(PatientService patientService) {
         this.patientService = patientService;
     }
+
 
     @PostMapping("/create")
     public ResponseEntity<?> createPatient(@RequestBody PatientRequest request) {
@@ -29,7 +32,7 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getPatientById(@PathVariable int id) {
+    public ResponseEntity<?> getPatientById(@PathVariable Long id) {
         patientService.getPatientById(id);
         return ResponseEntity.ok().body("");
     }
@@ -41,7 +44,7 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatePatient(@PathVariable int id, @RequestBody PatientRequest request) {
+    public ResponseEntity<?> updatePatient(@PathVariable Long id, @RequestBody PatientRequest request) {
         patientService.updatePatient(id, request);
         return ResponseEntity.ok().body("");
     }

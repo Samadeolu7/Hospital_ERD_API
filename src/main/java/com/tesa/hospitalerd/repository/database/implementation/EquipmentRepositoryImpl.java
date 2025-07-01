@@ -3,6 +3,7 @@ package com.tesa.hospitalerd.repository.database.implementation;
 import com.tesa.hospitalerd.model.entity.Equipment;
 import com.tesa.hospitalerd.repository.database.interfaces.EquipmentRepository;
 import com.tesa.hospitalerd.repository.database.query.EquipmentQuery;
+import com.tesa.hospitalerd.repository.database.query.MedicationInventoryQuery;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -29,19 +30,19 @@ public class EquipmentRepositoryImpl implements EquipmentRepository {
                 .addValue("equipmentPurchaseDate", equipment.getEquipmentPurchaseDate())
                 .addValue("equipmentLastMaintenanceDate", equipment.getEquipmentLastMaintenanceDate())
                 .addValue("equipmentStatus", equipment.getEquipmentStatus());
-        jdbcTemplate.update(EquipmentQuery.INSERT_EQUIPMENT, params);
+        jdbcTemplate.update(MedicationInventoryQuery.EquipmentQuery.INSERT_EQUIPMENT, params);
     }
 
     @Override
     public List<Equipment> findAllEquipments() {
-        return jdbcTemplate.query(EquipmentQuery.FIND_ALL_EQUIPMENTS, new BeanPropertyRowMapper<>(Equipment.class));
+        return jdbcTemplate.query(MedicationInventoryQuery.EquipmentQuery.FIND_ALL_EQUIPMENTS, new BeanPropertyRowMapper<>(Equipment.class));
     }
 
     @Override
-    public Optional<Equipment> findEquipmentById(int id) {
+    public Optional<Equipment> findEquipmentById(Long id) {
         try {
              Equipment equipment = jdbcTemplate.queryForObject(
-                    EquipmentQuery.FIND_EQUIPMENT_BY_ID,
+                    MedicationInventoryQuery.EquipmentQuery.FIND_EQUIPMENT_BY_ID,
                     new MapSqlParameterSource("equipmentId", id),
                     new BeanPropertyRowMapper<>(Equipment.class));
             return Optional.ofNullable(equipment);
@@ -53,7 +54,7 @@ public class EquipmentRepositoryImpl implements EquipmentRepository {
     @Override
     public List<Equipment> equipmentSearch(String query) {
         return jdbcTemplate.query(
-                EquipmentQuery.SEARCH_EQUIPMENT,
+                MedicationInventoryQuery.EquipmentQuery.SEARCH_EQUIPMENT,
                 new MapSqlParameterSource("query", "%" + query + "%"),
                 new BeanPropertyRowMapper<>(Equipment.class));
     }
@@ -67,7 +68,7 @@ public class EquipmentRepositoryImpl implements EquipmentRepository {
     }
 
     @Override
-    public void markEquipmentForMaintenance(int id) {
+    public void markEquipmentForMaintenance(Long id) {
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("equipmentId", id)
                 .addValue("equipmentStatus", "MAINTENANCE");
@@ -75,7 +76,7 @@ public class EquipmentRepositoryImpl implements EquipmentRepository {
     }
 
     @Override
-    public void markEquipmentAsAvailable(int id) {
+    public void markEquipmentAsAvailable(Long id) {
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("equipmentId", id)
                 .addValue("maintenanceDate", new Date())
@@ -84,7 +85,7 @@ public class EquipmentRepositoryImpl implements EquipmentRepository {
     }
 
     @Override
-    public void decommissionEquipment(int id) {
+    public void decommissionEquipment(Long id) {
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("equipmentId", id)
                 .addValue("equipmentStatus", "DECOMMISSIONED");

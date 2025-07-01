@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Data
@@ -17,7 +17,7 @@ public class EquipmentRequest {
 
     private String equipmentName;
     private String equipmentSerialNumber;
-    private LocalDate equipmentPurchaseDate;
-    private LocalDate equipmentLastMaintenanceDate;
+    private LocalDateTime equipmentPurchaseDate;
+    private LocalDateTime equipmentLastMaintenanceDate;
     private EquipmentStatus equipmentStatus;
 }
